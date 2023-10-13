@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+    <title>Cooky.com Header</title>
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #ff6600;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav li {
+            margin-right: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input {
+            border: none;
+            padding: 8px;
+            border-radius: 10px;
+        }
+
+        .search-icon {
+            margin-right: 10px;
+            font-size: 24px;
+        }
+
+        .login-btn {
+            background-color: transparent;
+            border: 2px solid #fff;
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .body-main
+        {
+            background-color: rgba(243, 243, 243, 0.947);
+        }
+        .card
+        {
+            width: 50em;
+            height: 20em;
+        }
+        .Name-meal
+        {
+            width: 45em;
+            height: 2.5em;
+            margin-top: 2em;
+            margin-left: 2em;
+        }
+        .Descri-meal
+        {
+            width: 45em;
+            height: 5em;
+            margin-top: 2em;
+            margin-left: 2em;
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">KITCHEN</div>
+            <nav>
+                <ul>
+                    <li><a href="#">Trang Chủ</a></li>
+                    <li><a href="#">Món Ăn</a></li>
+                    <li><a href="#">Nấu Ăn</a></li>
+                    <li><a href="#">Tin Tức</a></li>
+                </ul>
+            </nav>
+            <div class="search-box">
+                <i class="search-icon">&#x1F50D;</i>
+                <input type="text" class="search-input" placeholder="Tìm kiếm...">
+            </div>
+            <button class="login-btn">Đăng Nhập</button>
+        </div>
+    </header>
+<br>
+    <div class="container">
+           <div class="body-main">
+            <div class="card">
+                <h3>Món Ăn</h3>
+                <div class="card-body">
+                    <input class="Name-meal" type="text" name="" placeholder="Nhập tên món ăn" id=""> 
+                    
+                    <input class="Descri-meal" type="text" name="" placeholder="Mô tả món ăn" id="">
+                    
+                    
+                   
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Nguyên Liệu</h3>
+                <div class="card-body">
+                    <input class="Name-meal" type="text" name="" placeholder="Nguyên Liệu 1" id=""> 
+                    
+                    <input class="Name-meal" type="text" name="" placeholder="Nguyên Liệu 2" id="">
+                    
+                    
+                   
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Cách Làm</h3>
+                <div class="card-body">
+                    <input class="Name-meal" type="text" name="" placeholder="Bước 1" id=""> 
+                    
+                    <input class="Descri-meal" type="text" name="" placeholder="Bước 2" id="">
+                    
+                    
+                   
+                </div>
+            </div>
+            
+           </div>    
+    </div>
+       
+            
+
+        
+       
+   
+        
+        
+   
+
+</body>
+</html>
