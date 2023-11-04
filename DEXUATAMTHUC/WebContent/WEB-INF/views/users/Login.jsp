@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -131,7 +132,7 @@ margin-right: 5px;
 </head>
 <body id="LoginForm">
 	<div class="container">
-		<a class="home-page" href = "home.jsp" >
+		<a class="home-page" href = "<c:url value = '/' />" >
 			<i class="fa fa-solid fa-arrow-left fa-3x"></i>
 			<span class="home-title">Back</span>
 		</a>
@@ -178,11 +179,11 @@ margin-right: 5px;
 				<div class="card-footer">
 					<div class="d-flex justify-content-center links">
 						Don't have an account?
-						<a href="#">Sign Up</a>
+						<a href="${pageContext.request.contextPath}/users/register.htm">Sign Up</a>
 					</div>
-					<div class="d-flex justify-content-center">
+				<!--  	<div class="d-flex justify-content-center">
 						<a href="#">Forgot your password?</a>
-					</div>
+					</div> -->
 				</div>
 		        
 		       <!-- <input type="submit" value="Đăng Nhập" class="form-submit"> -->

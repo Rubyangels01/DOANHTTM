@@ -40,6 +40,13 @@ public class USER {
 		this.password = password;
 		
 	}
+	public USER(String tenUser, String email, String password) {
+		super();
+		this.tenUser = tenUser;
+		this.email = email;
+		this.password = password;
+	}
+	
 	
 	
 }

@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import poly.bean.USER;
 
 
@@ -36,7 +35,15 @@ public class USER_DAO {
     }
 
 
-   
+	 public void ADD_USERS(USER user) throws SQLException {
+	        String query = "INSERT INTO USERS(TENND,EMAIL,PASSWORD) VALUES (?, ?,?)";
+	        try (PreparedStatement statement = connection.prepareStatement(query)) {
+	            statement.setString(1, user.getTenUser());
+	            statement.setString(2, user.getEmail());
+	            statement.setString(3, user.getPassword());	           
+	            statement.executeUpdate();
+	        }
+	    }  
 
 public ArrayList<USER> LISTUSER() throws SQLException {
    	ArrayList<USER> LIST_USERS = new ArrayList<>();
@@ -59,4 +66,27 @@ public ArrayList<USER> LISTUSER() throws SQLException {
        }
        return LIST_USERS;
    }
+
+public void UPDATE_USERS(String newpass,int maUser) throws SQLException {
+	 
+    String query = "UPDATE USERS SET PASSWORD = ? WHERE ID_ND = ?";
+    try {
+        connection.setAutoCommit(false);  // Bắt đầu giao dịch
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, newpass);
+            statement.setInt(2, maUser);	  
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated == 1) {
+                connection.commit();  // Commit giao dịch nếu cập nhật thành công
+            } else {
+                connection.rollback();  // Rollback nếu không có hàng nào được cập nhật
+            }
+        }
+    } catch (SQLException e) {
+        connection.rollback();  // Rollback nếu có lỗi
+        throw e;
+    } finally {
+        connection.setAutoCommit(true);  // Đặt lại trạng thái mặc định
+    }
+}
 }

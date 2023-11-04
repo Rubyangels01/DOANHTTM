@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    
+
+<!DOCTYPE>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -462,6 +465,32 @@ color: #fff
 		#menu .dropdown-item{ text-align: center; position: relative; padding: 10px;}
 		#menu .dropdown-item:after{ content: ""; position: absolute; width: 40%; height: 2px;}
              
+        product-list {
+        	display: flex;
+        }   
+        
+        #suggestions {
+        position: absolute;
+        top: 256px;
+        width: 60%;
+        max-height: 200px;
+        left: 330px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        overflow-y: auto;
+       
+    }
+
+    #suggestions div {
+        padding: 8px;
+        cursor: pointer;
+        border:1px solid #ccc;
+    }
+    #suggestions div:hover {
+        background-color:#dbd9d9;
+        cursor: pointer;
+    }
+          
 	</style>
 	
 </head>
@@ -471,7 +500,7 @@ color: #fff
 	 	<nav class="navbar navbar-expand-lg">
 			<div class="container">
 				<div>
-		            <a class="navbar-brand" href="home.jsp">KITCHEN</a>
+		            <a class="navbar-brand" href="${pageContext.request.contextPath}/users/Main.htm">KITCHEN</a>
 		        </div>
 		        
 			    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu"> 
@@ -481,7 +510,7 @@ color: #fff
             <div class="collapse navbar-collapse" id="menu">
 				<ul class="navbar-nav mx-auto">
 					<li class="nav-item">
-					  <a class="nav-link" aria-current="page" href="home.jsp">Trang Chủ</a>
+					  <a class="nav-link" aria-current="page" href="${pageContext.request.contextPath}/users/Main.htm">Trang Chủ</a>
 					</li>
 					
 					<li class="nav-item dropdown">
@@ -489,12 +518,15 @@ color: #fff
 						Danh Mục
 					  </a>
 					  <ul class="dropdown-menu" >
-						<li><a class="dropdown-item" href="notaccount/DanhMucMonAn.jsp">Danh Mục Món Ăn</a></li>
-				<!--	<li><a class="dropdown-item" href="#">Gợi Ý Hôm Nay</a></li> 	-->
-						<li><a class="dropdown-item" href="notaccount/TimKiemMonAn.jsp">Tìm Kiếm Món Ăn</a></li>
-						<li><a class="dropdown-item" href="notaccount/mon_an_pho_bien.jsp">Món Ăn Phổ Biến</a></li>
-				<!--		<li><a class="dropdown-item" href="#">Danh Sách Yêu Thích</a></li> -->
-				<!--		<li><a class="dropdown-item" href="#">Tạo Món Ăn</a></li> 	-->
+						
+						<li><a  class="dropdown-item" href="${pageContext.request.contextPath}/users/mainfood.htm">Danh Mục Món Ăn</a></li>
+						
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/suggest.htm">Gợi Ý Hôm Nay</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/findmeal.htm">Tìm Kiếm Món Ăn</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/suggest.htm">Món Ăn Phổ Biến</a></li>
+						
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/listsave.htm">Danh Sách Yêu Thích</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/createmeal.htm">Tạo Món Ăn</a></li>
 					  </ul>
 					</li>
 					
@@ -504,27 +536,40 @@ color: #fff
 			  	</ul>
 			  	
 				
-			
-			
-				<div>
-	                <button class="login-btn"><a href="login.jsp" >Đăng Nhập</a></button>
+				<div class="dropdown">
+	                <button  onclick="showDropdown()" class="login-btn"><i class="fa-solid fa-user"></i> ${sessionScope.nameuser}</button>
+	                	<div id="myDropdown" class="dropdown-content">
+						    <a href="${pageContext.request.contextPath}/users/acountuser.htm">Tài Khoản</a>
+						    <a href="${pageContext.request.contextPath}/users/Login.htm">Logout</a>
+  						</div>
+	                
+	                
 	            </div>
+			
+				
 	    	</div>
             
         </div>
         </nav>
+        
       </header>
 	
+ 
 	
 	<main> 
         <div>
             
-            <img class="banner-image" src="https://goeco.link/VwwdLW" alt="Banner Image" class="w-100">
-            <form class="example" action="/action_page.php" style="margin:auto;max-width:300px">
-                <input type="text" placeholder="Nhập các nguyên liệu..." name="search">
-                   
-                <button type="submit"><i class="fa fa-search"></i></button>
-            </form>
+            <img class="banner-image" src="https://bom.so/VidF5w" alt="Banner Image" class="w-100">
+            <form class="example" action="checksearch.htm" method = "post" style="margin:auto;max-width:300px">
+		    <input  type="text" name="search" id="searchInput" placeholder="Nhập các nguyên liệu..." >
+		    
+		    <div id="suggestions">
+		    
+		    </div>
+		   
+		    <button type="submit"><i class="fa fa-search"></i></button>
+			</form>
+
             
         </div>
         
@@ -556,84 +601,26 @@ color: #fff
             <div class="row">
                 
                     <h1 class="text-center">Các món được tìm kiếm nhiều nhất</h1>
-                    <div class="col-md-4">
-                        <div class="image-container">
-                            <div class="card">
-                                <img class="meal-image card-img" src="https://goeco.link/YpZGm" alt="Banner Image">
-                                <div class="Name-meal">
-                                    <h5>Bánh bao chiên</h5>
-                                    <div class="btn"></div>
-                                    <a href="notaccount/SuonXao.jsp"><button class="btn-view" type="button">Xem</button></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <c:forEach items="${famousfood}" var="MEAL">
+					<div class="col-md-4">
+						<div class="image-container">
+							<div class="card">
+								<img class="meal-image card-img" src="${MEAL.hinhAnh}"
+									alt="Banner Image">
+								<div class="Name-meal">
+									<h5>${MEAL.tenMon}</h5>
+									
+									<div class="btn"></div>
+									<a href="${pageContext.request.contextPath}/users/Infor_Meal${MEAL.maMon}.htm"><button class="btn-view" type="button">Xem</button></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
 
-                    <div class="col-md-4">
-                        <div class="image-container">
-                            <div class="card">
-                                <img class="meal-image card-img" src="https://goeco.link/ZRylO" alt="Banner Image">
-                                <div class="Name-meal">
-                                    <h5>Sườn Xào Chua Ngọt</h5>
-                                    	
-                                    <div class="btn"></div>
-                                    <a href="notaccount/SuonXao.jsp"><button class="btn-view" type="button">Xem</button></a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="image-container">
-                            <div class="card">
-                                <img class="meal-image card-img" src="https://goeco.link/oAFzB" alt="Banner Image">
-                                <div class="Name-meal">
-                                    <h5>Gà Xào Sả Ớt</h5>
-                                    <div class="btn"></div>
-                                    <a href="notaccount/SuonXao.jsp"><button class="btn-view" type="button">Xem</button></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-<div class="col-md-4">
-                        <div class="image-container">
-                            <div class="card">
-                                <img class="meal-image card-img" src="https://goeco.link/YpZGm" alt="Banner Image">
-                                <div class="Name-meal">
-                                    <h5>Bánh bao chiên</h5>
-                                    <div class="btn"></div>
-                                <a href="notaccount/SuonXao.jsp"><button class="btn-view" type="button">Xem</button></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     
-                        <div class="col-md-4">
-                            <div class="image-container">
-                                <div class="card">
-                                    <img class="meal-image card-img" src="https://goeco.link/ZRylO" alt="Banner Image">
-                                    <div class="Name-meal">
-                                        <h5>Sườn Xào Chua Ngọt</h5>
-                                        <div class="btn"></div>
-                                        <a href= "notaccount/SuonXao.jsp"><button class="btn-view" type="button">Xem</button></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="col-md-4">
-                            <div class="image-container">
-                                <div class="card">
-                                    <img class="meal-image card-img" src="https://goeco.link/oAFzB" alt="Banner Image">
-                                    <div class="Name-meal">
-                                        <h5>Gà Xào Sả Ớt</h5>
-                                        <div class="btn"></div>
-                                        <a href="notaccount/SuonXao.jsp"><button class="btn-view" type="button">Xem</button></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
                     
                     
                 
@@ -670,6 +657,124 @@ color: #fff
                 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
         </div>
     </footer>
+    <script type="text/javascript">
+    function showDropdown() {
+    	  document.getElementById("myDropdown").classList.toggle("show");
+    	}
+
+    	// Đóng dropdown nếu người dùng click bất kỳ nơi nào trên trang
+    	window.onclick = function(event) {
+    	  if (!event.target.matches('.dropbtn')) {
+    	    var dropdowns = document.getElementsByClassName("dropdown-content");
+    	    for (var i = 0; i < dropdowns.length; i++) {
+    	      var openDropdown = dropdowns[i];
+    	      if (openDropdown.classList.contains('show')) {
+    	        openDropdown.classList.remove('show');
+    	      }
+    	    }
+    	  }
+    	}
+
+    </script>
+    
+ <script th:inline="javascript">
+    /* Truyền giá trị từ Thymeleaf vào JavaScript */
+    var nguyenlieuList = /*[[${nguyenlieuList}]]*/ [];
+</script>
+<script>
+    document.getElementById('searchInput').addEventListener('input', updateSuggestions);
+    let selectedIngredients = [];
+
+    function updateSuggestions() {
+        const searchInput = document.getElementById('searchInput');
+        const inputValue = searchInput.value.toLowerCase();
+        const suggestionsContainer = document.getElementById('suggestions');
+
+        // Lấy danh sách nguyên liệu từ chuỗi nhập vào
+        const inputIngredients = inputValue.split(',').map(ingredient => ingredient.trim());
+
+        // Lấy nguyên liệu cuối cùng trong danh sách để so sánh với database
+        const lastIngredient = inputIngredients[inputIngredients.length - 1];
+
+        // Kiểm tra nếu nguyên liệu cuối cùng là trống hoặc thanh tìm kiếm trống, ẩn thanh gợi ý
+        if (!lastIngredient) {
+            suggestionsContainer.style.display = 'none';
+            return;
+        }
+
+        // Mô phỏng danh sách gợi ý (thay thế bằng dữ liệu từ server)
+        const suggestions = ['Cà chua', 'Cà tím', 'Cà rốt', 'Bắp cải', 'Tỏi', 'Hành tây', 'Rau mùi','Ớt','Hành Tím', 'Bột Năng'
+        	,'Muối','Nước Mắm','Đường','Hạt Nêm','Nước Tương','Dầu Hào', 'Tiêu','Sườn', 'Thịt Heo','Cá Chép','Thịt Bò','Cá Diêu Hồng', 'Hành Lá',
+        	'Cải bẹ xanh', 'Cải ngọt', 'Sữa chua', 'Trái chuối', 'Sữa tươi'];
+
+        const filteredSuggestions = suggestions.filter(suggestion =>
+            suggestion.toLowerCase().includes(lastIngredient)
+        );
+
+        displaySuggestions(filteredSuggestions, suggestionsContainer);
+    }
+
+    function displaySuggestions(suggestions, container) {
+        container.innerHTML = '';
+
+        suggestions.forEach(suggestion => {
+            const suggestionItem = document.createElement('div');
+            suggestionItem.textContent = suggestion;
+            suggestionItem.addEventListener('click', () => selectSuggestion(suggestion));
+            container.appendChild(suggestionItem);
+        });
+
+        container.style.display = suggestions.length > 0 ? 'block' : 'none';
+    }
+
+    function selectSuggestion(selectedSuggestion) {
+        const searchInput = document.getElementById('searchInput');
+
+        // Tách chuỗi thành danh sách nguyên liệu
+        const inputIngredients = searchInput.value.split(',').map(ingredient => ingredient.trim());
+
+        // Loại bỏ nguyên liệu cuối cùng trong danh sách và thêm nguyên liệu đã chọn
+        inputIngredients.pop();
+        inputIngredients.push(selectedSuggestion);
+
+        // Gắn lại chuỗi đã thay đổi vào thanh tìm kiếm
+        searchInput.value = inputIngredients.join(', ') + ', ';
+
+        // Thêm nguyên liệu đã chọn vào danh sách
+        selectedIngredients.push(selectedSuggestion);
+
+        // Tự động focus vào ô tìm kiếm để có thể tiếp tục nhập liệu
+        searchInput.focus();
+
+        // Cập nhật gợi ý
+        updateSuggestions();
+    }
+
+    function hideSuggestions() {
+        const suggestionsContainer = document.getElementById('suggestions');
+        suggestionsContainer.innerHTML = '';
+    }
+</script>
+<script>
+        function showDropdown() {
+  	  	  document.getElementById("myDropdown").classList.toggle("show");
+  	  	}
+  	
+  	  	// Đóng dropdown nếu người dùng click bất kỳ nơi nào trên trang
+  	  	window.onclick = function(event) {
+  	  	  if (!event.target.matches('.login-btn')) {
+  	  	    var dropdowns = document.getElementsByClassName("dropdown-content");
+  	  	    for (var i = 0; i < dropdowns.length; i++) {
+  	  	      var openDropdown = dropdowns[i];
+  	  	      if (openDropdown.classList.contains('show')) {
+  	  	        openDropdown.classList.remove('show');
+  	  	      }
+  	  	    }
+  	  	  }
+  	  	}
+  	 	</script>
+    
+   
     
 </body>
 </html>
