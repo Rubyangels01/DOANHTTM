@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <!DOCTYPE html>
     <html>
     <head>
@@ -8,7 +9,8 @@
         <title>ĐĂNG KÝ</title>
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.4/css/all.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
         <style>
             body
             {
@@ -72,36 +74,58 @@
                 margin-bottom: 10px;
                 box-sizing: border-box;
             }
+            
+            .home-page{
+		  width: 120px;
+		  height: 50px;
+		  display:flex ;
+		  gap: 10px;
+		  background-color: #FFC312 ;
+		  margin-top: 15px;
+		  text-decoration: none;
+		}
+		.home-page:hover{
+		  text-decoration: none;
+		}
+		.home-title{
+		  font-size:30px;
+		  text-decoration: none;
+		}
 
         </style>
     </head>
-    <body>
+    <body id="LoginForm">
+    	<div class="container">
+    		<a class="home-page" href = "<c:url value = '/' />" >
+				<i class="fa fa-solid fa-arrow-left fa-3x"></i>
+				<span class="home-title">Back</span>
+			</a>
     
-        <div id = "wrapper">
-        <form action="signup.htm" method="post" id="form-login">
-            <h1 class="form-heading">ĐĂNG KÝ</h1>
-            
-       
-        
-            <label for="username">Tên Tài Khoản:</label>
-            <input type="text" id="username" name="username" required>
-        
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-        
-            <label for="password">Mật Khẩu:</label>
-            <input type="password" id="password" name="password" required>
-        
-            <label for="confirmPassword">Nhập Lại Mật Khẩu:</label>
-           
-            <input type="password" id="confirmPassword" name="confirmPassword" required>
-             <p style="font-size:1em;"> ${message}</p>
-            <input type="submit"  value="Đăng Ký" class="form-submit">
-			
-        </form>
-    </div>
+	        <div id = "wrapper">
+		        <form action="signup.htm" method="post" id="form-login">
+		            <h1 class="form-heading">ĐĂNG KÝ</h1>
+		            
+		       
+		        
+		            <label for="username">Tên Tài Khoản:</label>
+		            <input type="text" id="username" name="username" required>
+		        
+		            <label for="email">Email:</label>
+		            <input type="email" id="email" name="email" required>
+		        
+		            <label for="password">Mật Khẩu:</label>
+		            <input type="password" id="password" name="password" required>
+		        
+		            <label for="confirmPassword">Nhập Lại Mật Khẩu:</label>
+		           
+		            <input type="password" id="confirmPassword" name="confirmPassword" required>
+		             <p style="font-size:1em;"> ${message}</p>
+		            <input type="submit"  value="Đăng Ký" class="form-submit">
+					
+		        </form>
+	    	</div>
     
-	
+		</div>
 
     </body>
     </html>

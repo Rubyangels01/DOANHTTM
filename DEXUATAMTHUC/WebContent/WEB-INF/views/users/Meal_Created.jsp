@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
 
   
-    <title>Cooky.com Header</title>
+    <title>KITCHEN.com</title>
     <style>
         /* Reset CSS */
         * {
@@ -507,56 +507,81 @@
 </head>
 <body>
     <header>
-        <div class="container">
-            <div class="logo">KITCHEN</div>
-            <nav>
-                <ul>
-                    <li><a href="Home.html">Trang Chủ</a></li>
-                    <!-- <li><a href="#">Món Ăn</a></li> -->
-                    <li class="dropdown">
-                        <button onclick="myFunction()" class="dropbtn">Danh Mục
-                            <i class="fa fa-caret-down"></i>
-                        
-                            <div id="myDropdown" class="dropdown-content">  <!--dropdown danh mục -->
-                                <a href="#">Danh Mục Món Ăn</a>
-                                <a href="GoiYMonAn.html">Gợi Ý Hôm Nay</a>
-                                <a href="TimKiemMonAn.html">Tìm Kiếm Món Ăn</a>
-                                <a href="MonAnPhoBien.html">Món Ăn Phổ Biến</a>
-                                <a href="DSYeuThich.html">Danh Sách Yêu Thích</a>
-                                <a href="TaoMon.html">Tạo Món Ăn</a>
-                         </div>
-                        </button>
-                    </li>
-
-                    <script>
-                        /* When the user clicks on the button, 
-                        toggle between hiding and showing the dropdown content */
-                        function myFunction() {
-                          document.getElementById("myDropdown").classList.toggle("show");
-                        }
-                        
-                        // Close the dropdown if the user clicks outside of it
-                        window.onclick = function(event) {
-                          if (!event.target.matches('.dropbtn')) {
-                            var dropdowns = document.getElementsByClassName("dropdown-content");
-                            var i;
-                            for (i = 0; i < dropdowns.length; i++) {
-                              var openDropdown = dropdowns[i];
-                              if (openDropdown.classList.contains('show')) {
-                                openDropdown.classList.remove('show');
-                              }
-                            }
-                          }
-                        }
-                    </script>
-
-                   
-                    <li><a href="#">Tin Tức</a></li>
-                </ul>
-            </nav>
-            <button class="login-btn"><a href="DangNhap.html" >Đăng Nhập</a></button>
+	 	<nav class="navbar navbar-expand-lg">
+			<div class="container">
+				<div>
+		            <a class="navbar-brand" href="${pageContext.request.contextPath}/users/Main.htm">KITCHEN</a>
+		        </div>
+		        
+			    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu"> 
+					<span class="navbar-toggler-icon"></span>
+				</button>
+	        
+            <div class="collapse navbar-collapse" id="menu">
+				<ul class="navbar-nav mx-auto">
+					<li class="nav-item">
+					  <a class="nav-link" aria-current="page" href="${pageContext.request.contextPath}/users/Main.htm">Trang Chủ</a>
+					</li>
+					
+					<li class="nav-item dropdown">
+					  <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+						Danh Mục
+					  </a>
+					  <ul class="dropdown-menu" >
+						
+						<li><a  class="dropdown-item" href="${pageContext.request.contextPath}/users/mainfood.htm">Danh Mục Món Ăn</a></li>
+						
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/suggest.htm">Gợi Ý Hôm Nay</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/findmeal.htm">Tìm Kiếm Món Ăn</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/famousfood.htm">Món Ăn Phổ Biến</a></li>
+						
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/search_user.htm">Tìm Kiếm Người Dùng</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/createmeal.htm">Tạo Món Ăn</a></li>
+					  </ul>
+					</li>
+					
+					<li class="nav-item">
+					  <a class="nav-link" href="#">Tin Tức</a>
+					</li>
+			  	</ul>
+			  	
+				
+				<div class="dropdown">
+	                <button  onclick="showDropdown()" class="login-btn"><i class="fa-solid fa-user"></i> ${sessionScope.nameuser}</button>
+	                	<div id="myDropdown" class="dropdown-content">
+						    <a href="${pageContext.request.contextPath}/users/acountuser.htm">Tài Khoản</a>
+						    <a href="${pageContext.request.contextPath}/users/Login.htm">Logout</a>
+  						</div>
+	                
+	                
+	            </div>
+			
+				
+	    	</div>
+            
         </div>
-    </header>
+        </nav>
+        
+        <script>
+        function showDropdown() {
+  	  	  document.getElementById("myDropdown").classList.toggle("show");
+  	  	}
+  	
+  	  	// Đóng dropdown nếu người dùng click bất kỳ nơi nào trên trang
+  	  	window.onclick = function(event) {
+  	  	  if (!event.target.matches('.login-btn')) {
+  	  	    var dropdowns = document.getElementsByClassName("dropdown-content");
+  	  	    for (var i = 0; i < dropdowns.length; i++) {
+  	  	      var openDropdown = dropdowns[i];
+  	  	      if (openDropdown.classList.contains('show')) {
+  	  	        openDropdown.classList.remove('show');
+  	  	      }
+  	  	    }
+  	  	  }
+  	  	}
+  	 	</script>
+        
+      </header>
 
     <main>
         
@@ -565,13 +590,17 @@
             
                 <div class="col-md-9">
                     <div class="card">
-                        <img class="meal-detail card-img" src="${imgUrl}">
+                        <img class="meal-detail card-img" src="${hinhanh}">
                     </div>
 
                     <div class="py-5">
                         <div class="card-title">
                             <p>
                                 ${tenMon}
+                                
+                            </p>
+                            <p>
+                            	${level} |  ${hour} Giờ : ${minute} Phút
                             </p>
                         </div>
                     </div>

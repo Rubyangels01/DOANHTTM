@@ -37,6 +37,11 @@ public class CONGTHUC {
 		this.doKho = doKho;
 		this.time = time;
 	}
+	public CONGTHUC(String doKho, TIME time) {
+		super();
+		this.doKho = doKho;
+		this.time = time;
+	}
 	
 	
 	

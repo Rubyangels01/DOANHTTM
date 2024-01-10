@@ -5,15 +5,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="shortcut icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/561/561611.png">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script> -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel="shortcut icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/561/561611.png">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  	<!--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+  	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
     <title>KITCHEN.com</title>
     <style>
         /* Reset CSS */
@@ -21,6 +23,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
         }
 
         /* Header Styles */
@@ -56,11 +59,11 @@
         }
 
         .col-md-12 h1 {
-           
+            text-decoration: none;
             margin-left: 0.5em;
             margin-top: 1em;
             margin-bottom: 1em;
-           
+            
             margin-right: 0.5em;
         }
 
@@ -82,7 +85,7 @@
 
         h5 {
             font-size: 20px;
-            margin-bottom: 1.5em;
+            font-family: 'Montserrat', sans-serif;
         }
         
         .container {
@@ -97,7 +100,7 @@
         .logo {
             font-size: 32px;
             font-weight: bold;
-text-transform: uppercase;
+            text-transform: uppercase;
         }
 
         nav ul {
@@ -115,7 +118,7 @@ text-transform: uppercase;
             
             text-decoration: none;
             color: #fff;
-            
+            /* font-weight: bold; */
             font-size: 18px;
         }
         nav a:hover {
@@ -128,7 +131,7 @@ text-transform: uppercase;
             color: #fff;
             /* padding: 16px; */
             font-size: 18px;
-            
+            /* font-weight: bold; */
             border: none;
             cursor: pointer;
         }
@@ -178,7 +181,7 @@ text-transform: uppercase;
         .login-btn a {
             color: #fff;
             text-decoration: none;
-            
+            /* font-weight: bold; */
             
         }
 
@@ -227,11 +230,13 @@ text-transform: uppercase;
             opacity: 1;
             text-decoration: none;
         }
-.footer p {
+
+        .footer p {
             color: #fff;
             margin: 15px 0 10px 0;
             font-size: 1rem;
             font-weight: 300;
+            font-family: 'Montserrat', sans-serif;
         }
 
         .card {
@@ -354,7 +359,7 @@ text-transform: uppercase;
             border: 1px solid #ff6600;
             cursor: pointer;
         }
-/* .col-md-12
+        /* .col-md-12
         {
             margin-right: 50em;
         }
@@ -370,13 +375,17 @@ text-transform: uppercase;
             border: 1px solid #333;
             text-align: center;
             /* margin-left: 8em; */
-            margin-right: 2em;
+            margin-right: 11.5em;
             width: 100%;
-            font-size: 12px;
+            font-size: 18px;
             font-weight: bold;
+            display: inline-block;
            
             
         }
+
+        
+        
 
         .btn-view:hover
         {
@@ -402,50 +411,82 @@ text-transform: uppercase;
             border: 2px solid #ff6600;
         }
         
-        .container_swap{
-
-            width: 100%;
-            /* padding: 5px 30px 5px 30px; */
+        .navbar-brand{
+        	color: #fff;
+        	font-size: 32px
+        }
+        .navbar-brand:hover{
+color: #fff
+        }
+        .nav-link {
+        	color: #fff;
+        	font-size: 20px
+        }
+        .dropdown-item {
+        	border-bottom: 1px solid black;
+        	font-size: 20px;
+        	
+        }
+        
+        
+        
+        #menu .nav-link{ padding: 5px 20px }
+		#menu .nav-link:hover {color: black}
+		#menu .dropdown-item{ text-align: center; position: relative; padding: 10px;}
+		#menu .dropdown-item:after{ content: ""; position: absolute; width: 40%; height: 2px;}
            
-
-        } 
-        .div_left {
-            width: 30%;
-
-            float: left;
-
-            text-align: center;
-            /* padding: 5px 30px 5px 30px; */
+        .btn-viewall
+        {
+            padding: 5px 50px 5px 50px;
+            background-color: rgb(255, 255, 255);
+            border: 2px solid #333;
             border-radius: 10px;
-            margin-bottom: 1em;
-
-        }
-        .div_center {
-            width: 30%;
-
-            float: left;
-
             text-align: center;
-            /* padding: 5px 30px 5px 30px; */
-            border-radius: 10px;
-            margin-left: 1em;
-            /* background-color:aquamarine; */
-
-            
+            margin-left: 71em;
+            /* margin-top: 5em; */
         }
-        .div_right {
-            width: 30%;
-
-            float: left;
-
-            text-align: center;
-            /* padding: 5px 30px 5px 30px; */
-            border-radius: 10px;
-            margin-left: 1em;
-            /* background-color: red; */
-            
-            
+        .btn-viewall:hover
+        {
+            background-color: #ff6600;
+            color: #fff;
+            border: 2px solid #ff6600;
         }
+          
+
+        /* .container_swap{
+
+width: 100%;
+padding: 5px 30px 5px 30px;
+
+} */
+
+/* .div_left{
+
+width: 50%;
+
+float: left;
+
+text-align: center;
+padding: 5px 30px 5px 30px;
+border-radius: 10px;
+
+
+
+} */
+
+/* .div_right{
+
+width: 50%;
+
+float: left;
+
+text-align: center;
+padding: 5px 30px 5px 30px;
+border-radius: 10px;
+
+
+} */
+        
         
     </style>
 </head>
@@ -454,7 +495,7 @@ text-transform: uppercase;
 	 	<nav class="navbar navbar-expand-lg">
 			<div class="container">
 				<div>
-		            <a class="navbar-brand" href="<c:url value = '/admin/MainHome.htm' />">KITCHEN</a>
+		            <a class="navbar-brand" href="${pageContext.request.contextPath}/admin/MainHome.htm">KITCHEN</a>
 		        </div>
 		        
 			    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu"> 
@@ -473,9 +514,11 @@ text-transform: uppercase;
 					  </a>
 					  <ul class="dropdown-menu" >
 						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/mainfood.htm">Danh Mục Món Ăn</a></li>
-						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/suggest.htm">Gợi Ý Hôm Nay</a></li>
-						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/findmeal.htm">Tìm Kiếm Món Ăn</a></li>
+						
+						<li><a class="dropdown-item" href="#">Gợi Ý Hôm Nay</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/findmeal.htm">Tìm Kiếm Món Ăn</a></li>
 						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/famousfood.htm">Món Ăn Phổ Biến</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/createmeal.htm">Tạo Món Ăn</a></li>
 						<li><a class="dropdown-item" href="#">Danh Sách Yêu Thích</a></li>
 						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/createmeal.htm">Tạo Món Ăn</a></li> 
 					  </ul>
@@ -486,10 +529,10 @@ text-transform: uppercase;
 						Quản Lý
 					  </a>
 					  <ul class="dropdown-menu" >
-						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/qlndung.htm">Quản Lý Người Dùng</a></li>
+						<li><a class="dropdown-item" href="<c:url value = '/admin/user.htm' />">Quản Lý Người Dùng</a></li>
 						<li><a class="dropdown-item" href="#">Quản Lý Bài Đăng</a></li>
-						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/qlmonan.htm">Quản Lý Món Ăn</a></li>
-						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/qlDM.htm">Quản Lý Danh Mục</a></li>
+						<li><a class="dropdown-item" href="<c:url value = '/admin/meal.htm' />">Quản Lý Món Ăn</a></li>
+						<li><a class="dropdown-item" href="<c:url value = '/admin/category.htm' />">Quản Lý Danh Mục</a></li>
 						
 					  </ul>
 					</li>
@@ -499,6 +542,7 @@ text-transform: uppercase;
 					</li>
 			  	</ul>
 			  	
+				
 				<div class="dropdown">
 	                <button  onclick="showDropdown()" class="login-btn"><i class="fa-solid fa-user"></i> ${sessionScope.nameuser}</button>
 	                	<div id="myDropdown" class="dropdown-content">
@@ -508,6 +552,7 @@ text-transform: uppercase;
 	                
 	                
 	            </div>
+			
 				
 	    	</div>
             
@@ -532,144 +577,139 @@ text-transform: uppercase;
   	  	  }
   	  	}
   	 	</script>
+        
       </header>
 
     <main>
-        <div class="container">
+        <div class="container py-5">
             <div class="row">
-                <div class="col-md-12">
-                    <h1 style="text-align: center;">QUẢN LÝ BÀI ĐĂNG</h1>
-                     <c:forEach items="${ListNotAccept}" var="MEAL">
-                        <div class="col-md-4">
-                            <div class="image-container">
-                                <div class="card">
-                                    <img class="meal-image card-img" src="${MEAL.hinhAnh}" alt="Banner Image">
-                                    <div class="Name-meal">
-                                        <h5>${MEAL.tenMon}</h5>
-                                        <h5>By <span style="font-weight: bold;">${MEAL.tenND}@</span></h5>
-                                        <!-- <div class="btn"></div> -->
-                                        <div class="container_swap">
-                                            <div class="div_left"><a href="#"><button class="btn-view" type="button">Xem</button></a></div>
-                                            <div class="div_center"><a href="#"><button class="btn-view" style="background: rgb(9, 185, 126);" type="button">Duyệt</button></a></div>
-                                            <div class="div_right"><a href="#"><button class="btn-view" style="background:red; " type="button">Xóa</button></a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </c:forEach>
+               
+                    <h1 class="text-center">Món Ăn Buổi Sáng</h1>
+                   
+                       <c:forEach items="${Suggest_BreakFast}" var="MEAL">
+					<div class="col-md-4">
+						<div class="image-container">
+							<div class="card">
+								<img class="meal-image card-img" src="${MEAL.hinhAnh}"
+									alt="Banner Image">
+								<div class="Name-meal">
+									<h5>${MEAL.tenMon}</h5>
+									<div class="btn"></div>
+									<a href="${pageContext.request.contextPath}/users/Infor_Meal${MEAL.maMon}.htm"><button class="btn-view" type="button">Xem</button></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+
                         
 
-                        <div class="col-md-4">
-                            <div class="image-container">
-                                <div class="card">
-                                    <img class="meal-image card-img" src="https://s.net.vn/yQ1p" alt="Banner Image">
-                                    <div class="Name-meal">
-                                        <h5>Salad Trứng</h5>
-                                        <h5>By <span style="font-weight: bold;">ThaoVy@</span></h5>
-                                        <!-- <a href="ChiTietMonAn.html">Xem chi tiết</a> -->
-                                        <!-- <div class="btn"></div>
-                                        <a href="#"><button class="btn-view" type="button">Xem</button></a> -->
-                                        <div class="container_swap">
-                                            <div class="div_left"><a href="#"><button class="btn-view" type="button">Xem</button></a></div>
-                                            <div class="div_center"><a href="#"><button class="btn-view" style="background: rgb(9, 185, 126);" type="button">Duyệt</button></a></div>
-                                            <div class="div_right"><a href="#"><button class="btn-view" style="background:red; " type="button">Xóa</button></a></div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="image-container">
-                                <div class="card">
-                                    <img class="meal-image card-img" src="https://s.net.vn/uApF" alt="Banner Image">
-<div class="Name-meal">
-                                        <h5>Bánh Mì Trứng Nướng</h5>
-                                        <h5>By <span style="font-weight: bold;">QuocCuong@</span></h5>
-                                        <!-- <div class="btn"></div>
-                                        <a href="#"><button class="btn-view" type="button">Xem</button></a> -->
-                                        <div class="container_swap">
-                                            <div class="div_left"><a href="#"><button class="btn-view" type="button">Xem</button></a></div>
-                                            <div class="div_center"><a href="#"><button class="btn-view" style="background: rgb(9, 185, 126);" type="button">Duyệt</button></a></div>
-                                            <div class="div_right"><a href="#"><button class="btn-view" style="background:red; " type="button">Xóa</button></a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="image-container">
-                                <div class="card">
-                                    <img class="meal-image card-img" src="https://s.net.vn/gSYd" alt="Banner Image">
-                                    <div class="Name-meal">
-                                        <h5>Smoothie Trái Cây</h5>
-                                        <h5>By <span style="font-weight: bold;">Ruby@</span></h5>
-                                        <!-- <div class="btn"></div>
-                                        <a href="#"><button class="btn-view" type="button">Xem</button></a> -->
-                                        <div class="container_swap">
-                                            <div class="div_left"><a href="#"><button class="btn-view" type="button">Xem</button></a></div>
-                                            <div class="div_center"><a href="#"><button class="btn-view" style="background: rgb(9, 185, 126);" type="button">Duyệt</button></a></div>
-                                            <div class="div_right"><a href="#"><button class="btn-view" style="background:red; " type="button">Xóa</button></a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="image-container">
-                                <div class="card">
-                                    <img class="meal-image card-img" src="https://s.net.vn/72Sa" alt="Banner Image">
-                                    <div class="Name-meal">
-                                        <h5>Súp Rau Củ</h5>
-                                        <h5>By <span style="font-weight: bold;">ThanhTruc@</span></h5>
-                                        <!-- <div class="btn"></div>
-                                        <a href="#"><button class="btn-view" type="button">Xem</button></a> -->
-                                        <div class="container_swap">
-                                            <div class="div_left"><a href="#"><button class="btn-view" type="button">Xem</button></a></div>
-                                            <div class="div_center"><a href="#"><button class="btn-view" style="background: rgb(9, 185, 126);" type="button">Duyệt</button></a></div>
-                                            <div class="div_right"><a href="#"><button class="btn-view" style="background:red; " type="button">Xóa</button></a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="image-container">
-                                <div class="card">
-                                    <img class="meal-image card-img" src="https://s.net.vn/mKvn" alt="Banner Image">
-                                    <div class="Name-meal">
-                                        <h5>Sữa Chua Hoa Quả</h5>
-                                        <h5>By <span style="font-weight: bold;">TienDat@</span></h5>
-                                        <!-- <div class="btn"></div>
-                                        <a href="#"><button class="btn-view" type="button">Xem</button></a> -->
-                                        <div class="container_swap">
-                                            <div class="div_left"><a href="#"><button class="btn-view" type="button">Xem</button></a></div>
-                                            <div class="div_center"><a href="#"><button class="btn-view" style="background: rgb(9, 185, 126);" type="button">Duyệt</button></a></div>
-                                            <div class="div_right"><a href="#"><button class="btn-view" style="background:red; " type="button">Xóa</button></a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                 <div>
+                 	<button class="btn-viewall" type="submit">Xem Thêm <i class="fa-solid fa-share"></i></button> 
+                 </div>      
                     
-                    <button class="btn-viewall" type="submit">Xem Thêm <i class="fa-solid fa-share"></i></button>
-                </div>
+                
+                
             </div>
         </div>  
-        
-        
-                    
-        
+        <hr style="border: 1px solid black; margin-left: 12em; margin-right: 12em;">
+        <div class="container">
+            <div class="row">
                 
-        
+                    <h1 class="text-center">Món Ăn Buổi Trưa</h1>
+                         <c:forEach items="${Suggest_Lunch}" var="MEAL">
+					<div class="col-md-4">
+						<div class="image-container">
+							<div class="card">
+								<img class="meal-image card-img" src="${MEAL.hinhAnh}"
+									alt="Banner Image">
+								<div class="Name-meal">
+									<h5>${MEAL.tenMon}</h5>
+									<div class="btn"></div>
+									<a href="${pageContext.request.contextPath}/users/Infor_Meal${MEAL.maMon}.htm"><button class="btn-view" type="button">Xem</button></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+
+                       
+
+                       
+                        
+                    
+                    <!-- </div> -->
+                    <div>
+                    <button class="btn-viewall" type="submit">Xem Thêm <i class="fa-solid fa-share"></i></button>
+                    </div>
+                </div>
+            </div>
             
-        </div>
+        
+        <hr style="border: 1px solid black; margin-left: 12em; margin-right: 12em;">          
+        <div class="container">
+            <div class="row">
+                
+                    <h1 class="text-center">Món Ăn Buổi Tối</h1>
+                       <c:forEach items="${Suggest_Dinner}" var="MEAL">
+					<div class="col-md-4">
+						<div class="image-container">
+							<div class="card">
+								<img class="meal-image card-img" src="${MEAL.hinhAnh}"
+									alt="Banner Image">
+								<div class="Name-meal">
+									<h5>${MEAL.tenMon}</h5>
+									<div class="btn"></div>
+									<a href="${pageContext.request.contextPath}/users/Infor_Meal${MEAL.maMon}.htm"><button class="btn-view" type="button">Xem</button></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+
+                       
+                        
+                   
+                    <!-- </div> -->
+                    <div>
+                    <button class="btn-viewall" type="submit">Xem Thêm <i class="fa-solid fa-share"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+        
+        <hr style="border: 1px solid black; margin-left: 12em; margin-right: 12em;">      
+        <div class="container">
+            <div class="row">
+                
+                    <h1 class="text-center">Món Ăn Tráng Miệng</h1>
+                         <c:forEach items="${Suggest_Dessert}" var="MEAL">
+					<div class="col-md-4">
+						<div class="image-container">
+							<div class="card">
+								<img class="meal-image card-img" src="${MEAL.hinhAnh}"
+									alt="Banner Image">
+								<div class="Name-meal">
+									<h5>${MEAL.tenMon}</h5>
+									<div class="btn"></div>
+									<a href="${pageContext.request.contextPath}/users/Infor_Meal${MEAL.maMon}.htm"><button class="btn-view" type="button">Xem</button></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+
+                       
+                        
+                   
+                    <!-- </div> -->
+                    <div>
+                    <button class="btn-viewall" type="submit">Xem Thêm <i class="fa-solid fa-share"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+       
     
         
     </main>
@@ -683,7 +723,7 @@ text-transform: uppercase;
                 <div class="wave" id="wave4"></div>
             </div> -->
             <ul class="social-icon">
-<li class="social-icon__item"><a class="social-icon__link" href="#">
+                <li class="social-icon__item"><a class="social-icon__link" href="#">
                     <ion-icon name="logo-facebook"></ion-icon>
                   </a></li>
                 <li class="social-icon__item"><a class="social-icon__link" href="#">
@@ -699,7 +739,7 @@ text-transform: uppercase;
               <ul class="menu">
                 <li class="menu__item"><a class="menu__link" href="#">Trang chủ</a></li>
                 <li class="menu__item"><a class="menu__link" href="#">Danh Mục</a></li>
-                <li class="menu__item"><a class="menu__link" href="#">Nấu Ăn</a></li>
+                <!-- <li class="menu__item"><a class="menu__link" href="#">Nấu Ăn</a></li> -->
                 <li class="menu__item"><a class="menu__link" href="#">Tin Tức</a></li>
               </ul>
               <p class="text-center">&copy;All Rights Reserved</p>

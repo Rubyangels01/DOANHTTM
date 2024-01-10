@@ -552,11 +552,11 @@ color: #fff
 					  </a>
 					  <ul class="dropdown-menu" >
 						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/mainfood.htm">Danh Mục Món Ăn</a></li>
-						<li><a class="dropdown-item" href="<c:url value = '/users/Suggest.htm' />">Gợi Ý Hôm Nay</a></li>
-						<li><a class="dropdown-item" href="<c:url value = '/users/Search_Food.htm' />">Tìm Kiếm Món Ăn</a></li>
-						<li><a class="dropdown-item" href="<c:url value = '/users/Famous_List.htm' />">Món Ăn Phổ Biến</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/suggest.htm">Gợi Ý Hôm Nay</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/findmeal.htm">Tìm Kiếm Món Ăn</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/famousfood.htm">Món Ăn Phổ Biến</a></li>
 						<li><a class="dropdown-item" href="#">Danh Sách Yêu Thích</a></li>
-						<li><a class="dropdown-item" href="<c:url value = '/users/Create_Food.htm' />">Tạo Món Ăn</a></li> 
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/createmeal.htm">Tạo Món Ăn</a></li>  
 					  </ul>
 					</li>
 					
@@ -582,7 +582,7 @@ color: #fff
 				<div class="dropdown">
 	                <button  onclick="showDropdown()" class="login-btn"><i class="fa-solid fa-user"></i> ${sessionScope.nameuser}</button>
 	                	<div id="myDropdown" class="dropdown-content">
-						   
+						    <a href="${pageContext.request.contextPath}/admin/accountadmin.htm">Tài Khoản</a>
 						    <a href="${pageContext.request.contextPath}/users/Login.htm">Logout</a>
   						</div>
 	                
@@ -594,6 +594,26 @@ color: #fff
             
         </div>
         </nav>
+        
+        <script>
+        function showDropdown() {
+  	  	  document.getElementById("myDropdown").classList.toggle("show");
+  	  	}
+  	
+  	  	// Đóng dropdown nếu người dùng click bất kỳ nơi nào trên trang
+  	  	window.onclick = function(event) {
+  	  	  if (!event.target.matches('.login-btn')) {
+  	  	    var dropdowns = document.getElementsByClassName("dropdown-content");
+  	  	    for (var i = 0; i < dropdowns.length; i++) {
+  	  	      var openDropdown = dropdowns[i];
+  	  	      if (openDropdown.classList.contains('show')) {
+  	  	        openDropdown.classList.remove('show');
+  	  	      }
+  	  	    }
+  	  	  }
+  	  	}
+  	 	</script>
+  	 	
       </header>
 
 	<main>
@@ -631,7 +651,7 @@ color: #fff
 												<div class="container_swap">
 													<div class="div_left">
 														<a
-															href="${pageContext.request.contextPath}/users/Infor_Meal${MEAL.maMon}.htm"><button
+															href="${pageContext.request.contextPath}/admin/Infor_Meal${MEAL.maMon}.htm"><button
 																class="btn-view" type="button">Xem</button></a>
 													</div>
 													<div class="div_right">
@@ -661,26 +681,7 @@ color: #fff
 								</div>
 							</c:forEach>
 
-							<div class="col-md-4">
-								<div class="image-container">
-									<div class="card">
-										<img class="meal-image card-img"
-											src="https://goeco.link/oAFzB" alt="Banner Image">
-										<div class="Name-meal">
-											<h5>Gà Xào Sả Ớt</h5>
-											<div class="container_swap">
-												<div class="div_left">
-													<a href="#"><button class="btn-view" type="button">Xem</button></a>
-												</div>
-												<div class="div_right">
-													<a href="#"><button class="btn-view"
-															style="background: red;" type="button">Xóa</button></a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+							
 					</div>
 				</div>
 			

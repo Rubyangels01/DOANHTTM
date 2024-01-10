@@ -617,7 +617,7 @@ select {
 	 	<nav class="navbar navbar-expand-lg">
 			<div class="container">
 				<div>
-		            <a class="navbar-brand" href="${pageContext.request.contextPath}/users/Main.htm">KITCHEN</a>
+		            <a class="navbar-brand" href="<c:url value = '/admin/MainHome.htm' />">KITCHEN</a>
 		        </div>
 		        
 			    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu"> 
@@ -627,7 +627,7 @@ select {
             <div class="collapse navbar-collapse" id="menu">
 				<ul class="navbar-nav mx-auto">
 					<li class="nav-item">
-					  <a class="nav-link" aria-current="page" href="${pageContext.request.contextPath}/users/Main.htm">Trang Chủ</a>
+					  <a class="nav-link" aria-current="page" href="<c:url value = '/admin/MainHome.htm' />">Trang Chủ</a>
 					</li>
 					
 					<li class="nav-item dropdown">
@@ -635,15 +635,25 @@ select {
 						Danh Mục
 					  </a>
 					  <ul class="dropdown-menu" >
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/mainfood.htm">Danh Mục Món Ăn</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/suggest.htm">Gợi Ý Hôm Nay</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/findmeal.htm">Tìm Kiếm Món Ăn</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/famousfood.htm">Món Ăn Phổ Biến</a></li>
+						<li><a class="dropdown-item" href="#">Danh Sách Yêu Thích</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/createmeal.htm">Tạo Món Ăn</a></li> 
+					  </ul>
+					</li>
+					
+					<li class="nav-item dropdown">
+					  <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+						Quản Lý
+					  </a>
+					  <ul class="dropdown-menu" >
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/qlndung.htm">Quản Lý Người Dùng</a></li>
+						<li><a class="dropdown-item" href="#">Quản Lý Bài Đăng</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/qlmonan.htm">Quản Lý Món Ăn</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/qlDM.htm">Quản Lý Danh Mục</a></li>
 						
-						<li><a  class="dropdown-item" href="${pageContext.request.contextPath}/users/mainfood.htm">Danh Mục Món Ăn</a></li>
-						
-						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/suggest.htm">Gợi Ý Hôm Nay</a></li>
-						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/findmeal.htm">Tìm Kiếm Món Ăn</a></li>
-						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/famousfood.htm">Món Ăn Phổ Biến</a></li>
-						
-						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/search_user.htm">Tìm Kiếm Người Dùng</a></li>
-						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/createmeal.htm">Tạo Món Ăn</a></li>
 					  </ul>
 					</li>
 					
@@ -656,13 +666,13 @@ select {
 				<div class="dropdown">
 	                <button  onclick="showDropdown()" class="login-btn"><i class="fa-solid fa-user"></i> ${sessionScope.nameuser}</button>
 	                	<div id="myDropdown" class="dropdown-content">
-						    <a href="${pageContext.request.contextPath}/users/acountuser.htm">Tài Khoản</a>
+						    <a href="${pageContext.request.contextPath}/admin/accountadmin.htm">Tài Khoản</a>
 						    <a href="${pageContext.request.contextPath}/users/Login.htm">Logout</a>
   						</div>
 	                
 	                
 	            </div>
-			
+				
 				
 	    	</div>
             
@@ -708,8 +718,8 @@ select {
 									placeholder="Nhập tên món ăn" id="" required> <input
 									class="Descri-meal" type="text" name="mota"
 									placeholder="Mô tả món ăn" id="" required> 
-									<input style="margin-top: 2em; margin-left: 2.5em;"
-									name="hinhanh" type="text" id="fileInput"> 
+									<input style="margin-top: 2em; margin-left: 2.5em"
+									class="" type="text" id="fileInput"> 
 								<p id="errorMessage"></p>
 								<div class="px-5">
 									<p>
@@ -766,12 +776,12 @@ select {
 														class="unit myunit3">
 														<c:forEach var="nguyenlieu" items="${NguyenLieu}"
 															varStatus="statusNguyenLieu">
-															<option value="${nguyenlieu.maNguyenLieu}">${nguyenlieu.tenNguyenLieu}(${nguyenlieu.tenDonVi})</option>
+															<option value="${nguyenlieu.maNguyenLieu}">${nguyenlieu.tenNguyenLieu}</option>
 														</c:forEach>
 													</select>
 													<form:input class="total-meal" placeholder="Số Lượng"
 														path="CT_NguyenLieuList[${status.index}].soLuong" />
-													<button class="btn-remove" onclick="removeInput(event)"
+													<button class="btn-remove" onclick="removeInput()"
 														type="button">Xóa</button>
 													<br />
 												</p>
@@ -890,22 +900,19 @@ select {
         
         // Thêm các option vào select
         <c:forEach var="nguyenlieu" items="${NguyenLieu}" varStatus="statusNguyenLieu">
-            newRow += '<option value="${nguyenlieu.maNguyenLieu}">${nguyenlieu.tenNguyenLieu}';
-            newRow += ' (${nguyenlieu.tenDonVi}) </option>' ;
-            
-            
+            newRow += '<option value="${nguyenlieu.maNguyenLieu}">${nguyenlieu.tenNguyenLieu}</option>';
         </c:forEach>
         
         newRow += '</select>';
         newRow += '<input type="text" class="total-meal" placeholder="Số Lượng"  name="CT_NguyenLieuList[' + currentIndex + '].soLuong" />';
-        newRow += '<button class="btn-remove" onclick="removeInput(event)" type="button">Xóa</button>';
+        newRow += '<button class="btn-remove" onclick="removeInput()" type="button">Xóa</button>';
         newRow += '<br />';
          newRow += '</p>';
         $("#ingredientForm").append(newRow);
         currentIndex += 1;
     }
-	function removeInput(event) {
-		 $(event.currentTarget).closest('p').remove();
+	function removeInput() {
+	    $(this).closest('p').remove();
 	}
 
 

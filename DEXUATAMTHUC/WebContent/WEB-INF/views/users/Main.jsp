@@ -523,9 +523,9 @@ color: #fff
 						
 						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/suggest.htm">Gợi Ý Hôm Nay</a></li>
 						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/findmeal.htm">Tìm Kiếm Món Ăn</a></li>
-						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/suggest.htm">Món Ăn Phổ Biến</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/famousfood.htm">Món Ăn Phổ Biến</a></li>
 						
-						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/listsave.htm">Danh Sách Yêu Thích</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/search_user.htm">Tìm Kiếm Người Dùng</a></li>
 						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/createmeal.htm">Tạo Món Ăn</a></li>
 					  </ul>
 					</li>
@@ -609,6 +609,8 @@ color: #fff
 									alt="Banner Image">
 								<div class="Name-meal">
 									<h5>${MEAL.tenMon}</h5>
+									
+									
 									
 									<div class="btn"></div>
 									<a href="${pageContext.request.contextPath}/users/Infor_Meal${MEAL.maMon}.htm"><button class="btn-view" type="button">Xem</button></a>
@@ -705,7 +707,7 @@ color: #fff
         // Mô phỏng danh sách gợi ý (thay thế bằng dữ liệu từ server)
         const suggestions = ['Cà chua', 'Cà tím', 'Cà rốt', 'Bắp cải', 'Tỏi', 'Hành tây', 'Rau mùi','Ớt','Hành Tím', 'Bột Năng'
         	,'Muối','Nước Mắm','Đường','Hạt Nêm','Nước Tương','Dầu Hào', 'Tiêu','Sườn', 'Thịt Heo','Cá Chép','Thịt Bò','Cá Diêu Hồng', 'Hành Lá',
-        	'Cải bẹ xanh', 'Cải ngọt', 'Sữa chua', 'Trái chuối', 'Sữa tươi'];
+        	'Cải bẹ xanh', 'Cải ngọt', 'Sữa chua', 'Trái chuối', 'Sữa tươi','Thơm','Đậu Bắp','Cá Thác Lác','Thịt Băm','Cá Lóc','Dưa Leo','Mực','Dưa Leo','Xà Lách','Cá Hồi'];
 
         const filteredSuggestions = suggestions.filter(suggestion =>
             suggestion.toLowerCase().includes(lastIngredient)

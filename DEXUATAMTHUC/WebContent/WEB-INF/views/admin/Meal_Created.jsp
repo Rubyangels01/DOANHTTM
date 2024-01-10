@@ -1,20 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> -->
     <meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-	<link rel="shortcut icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/561/561611.png">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
-	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
-	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-  	<!--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
-  	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/561/561611.png">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+ 
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script> -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+
   
     <title>KITCHEN.com</title>
     <style>
@@ -35,7 +42,22 @@
             text-decoration: none;
         }
 
-       
+        main {
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            width: 100%;
+            /* margin-bottom: 40px; */
+            background-color: #f1f1f1;
+            min-height: 100px;
+            
+        }
+
+        /* footer {
+            background-color: #ff6600;
+            color: #fff;
+            padding-bottom: 50px; 
+        } */
+
         footer {
             font-family: 'Montserrat', sans-serif;
             position: relative;
@@ -49,7 +71,14 @@
             flex-direction: column;
         }
 
-        
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px; */
+        }
 
         .logo {
             font-size: 32px;
@@ -80,8 +109,11 @@
             text-decoration: none;
         }
 
-        
-        
+        .search-box {
+            display: flex;
+            align-items: center;
+        }
+
         .search-input {
             border: none;
             padding: 8px;
@@ -134,6 +166,13 @@
             /* display: block; */
             display: flex;
             margin-bottom: 10px;
+            
+            /* width: 30em;
+            height: 20em;
+            /* height: auto; */
+            /* display: block; */
+            /* display: flex;
+            margin-bottom: 10px; */
 
             /* width: 15em;
             height: 15em;
@@ -142,29 +181,19 @@
             /* margin: 20px auto; /* Điều chỉnh khoảng cách dưới header 
          max-width: 100%; */
         }
-        /* .image-container {
-            margin-top:  50px; 
+        .image-container {
+            margin-top:  50px; /* Khoảng cách 20px xung quanh container */
             margin-left: 2.3em;
-        } */
-        
+        }
         /* .col-md-12
         {
             margin-right: 50em;
         } */
-
-        .col-md-12 h1 {
-            text-decoration: none;
-            margin-left: 0.5em;
-            margin-top: 1em;
-            margin-bottom: 1em;
-
-        }
-        
         .Name-meal
         {
             text-align: center;
             font-weight: 3px;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Times New Roman', Times, serif;
             /* font-size: 5em; */
         }
         
@@ -183,17 +212,56 @@
         }
 
         .card {
-            margin-bottom: 2.5em;
             position: relative;
             display: flex;
             flex-direction: column;
             min-width: 0;
             word-wrap: break-word;
-            background-color: #fff;
+            /* background-color: white; */
+            background-color: rgb(255, 255, 255);
             background-clip: border-box;
             border: 1px solid rgba(0, 0, 0, 0.125);
             border-radius: 10px;
         }
+
+        .card-title {
+            
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            /* background-color: white; */
+            background-color: rgb(255, 255, 255);
+            background-clip: border-box;
+            border: 1px solid rgba(0, 0, 0, 0.125);
+            border-radius: 10px;
+            padding: 15px 10px 5px 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .card-detail {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            /* background-color: white; */
+            background-color: rgb(255, 255, 255);
+            background-clip: border-box;
+            border: 1px solid rgba(0, 0, 0, 0.125);
+            border-radius: 10px;
+            padding: 0px 0px 0px 10px;
+        }
+
+        p {
+            font-size: 24px;
+            
+            
+        }
+
+        
 
         .card-img {
             width: 100%;
@@ -203,11 +271,16 @@
         .py-5 {
             padding-top: 3rem !important;
             padding-bottom: 3rem !important;
+            
+            
         }
 
         h5 {
             font-size: 20px;
-            font-family: 'Montserrat', sans-serif;
+        }
+
+        .center {
+            text-align: center;
         }
 
         .dropbtn {
@@ -251,6 +324,132 @@
         .dropdown a:hover {background-color: #ff6600;}
 
         .show {display: block;}
+        
+        .search-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            height: 40px;
+            border-radius: 40px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            
+        }
+
+        .search-box:hover > .search-txt {
+            width: 960px;
+            
+            padding: 0 6px;
+        }
+
+        
+
+        .search-box:hover > .search-btn {
+            background: #fff;
+            color: #323232;
+        }
+
+        .search-btn {
+            color: #323232;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #323232;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.4s;
+            color: white;
+            cursor: pointer;
+            text-decoration: none;
+        } 
+
+        .search-btn > i {
+            font-size: 20px;
+        } 
+
+        .search-txt {
+            border: none;
+            background: none;
+            outline: none;
+            padding: 0;
+            color: #323232;
+            font-size: 16px;
+            transition: 0.4s;
+            line-height: 40px;
+            width: 0px;
+            font-weight: bold;
+        }
+
+
+        .btn-save {
+            width: 85%;
+            position: relative;
+            border-radius: 5px;
+            padding: 5px 10px 5px 10px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            margin-left: 20px;
+            background-color: white;
+            border-radius: 1px solid rgba(0, 0, 0, 0.125);
+        }
+
+        .btn-save:hover {
+            width: 85%;
+            position: relative;
+            border-radius: 5px;
+            padding: 5px 10px 5px 10px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            margin-left: 20px;
+            background-color: #ff6600;
+            color: #f1f1f1;
+            border-radius: 1px solid rgba(0, 0, 0, 0.125);
+            
+
+        }
+
+        /* .btn-like
+        {
+            margin-top: 2em;
+            padding: 5px 10em 5px 10em;
+            background-color: rgb(255, 255, 255);
+            border-radius: 10px;
+            text-align: center;
+            margin-left: 5em;
+        } */
+
+        .btn-like {
+            width: 85%;
+            position: relative;
+            border-radius: 5px;
+            padding: 5px 10px 5px 10px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            margin-left: 20px;
+            background-color: white;
+            border-radius: 1px solid rgba(0, 0, 0, 0.125);
+           
+           
+        }
+
+        .btn-like:hover {
+            width: 85%;
+            position: relative;
+            border-radius: 5px;
+            padding: 5px 10px 5px 10px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            margin-left: 20px;
+            background-color: #ff6600;
+            color: #f1f1f1;
+            border-radius: 1px solid rgba(0, 0, 0, 0.125);
+            
+
+        }
 
         .social-icon,
         .menu {
@@ -302,73 +501,16 @@
             font-family: 'Montserrat', sans-serif;
         }
 
-        div .card:hover {
-            border: 1px solid #ff6600;
-            cursor: pointer;
-        }
-
-        .btn-view
-        {
-            padding: 5px 30px 5px 30px;
-            /* margin-bottom: 1em; */
-            /* padding: 5px 30px 5px 30px; */
-            background-color: rgb(255, 255, 255);
-            border-radius: 10px;
-            border: 1px solid #333;
-            text-align: center;
-            /* margin-left: 8em; */
-            margin-right: 2em;
-            width: 100%;
-            font-size: 18px;
-            font-weight: bold;
-           
-            
-        }
-
-        .btn-view:hover
-        {
-            background-color: #ff6600;
-            color: #fff;
-            border: 1px solid #ff6600;
-        }
-
-        .btn {
-            text-align: center;
-            justify-content: center;
-        }
         
-        .navbar-brand{
-        	color: #fff;
-        	font-size: 32px
-        }
-        .navbar-brand:hover{
-color: #fff
-        }
-        .nav-link {
-        	color: #fff;
-        	font-size: 20px
-        }
-        .dropdown-item {
-        	border-bottom: 1px solid black;
-        	font-size: 20px;
-        	
-        }
-        
-        
-        
-        #menu .nav-link{ padding: 5px 20px }
-		#menu .nav-link:hover {color: black}
-		#menu .dropdown-item{ text-align: center; position: relative; padding: 10px;}
-		#menu .dropdown-item:after{ content: ""; position: absolute; width: 40%; height: 2px;}
         
     </style>
 </head>
 <body>
-    <header>
+   <header>
 	 	<nav class="navbar navbar-expand-lg">
 			<div class="container">
 				<div>
-		            <a class="navbar-brand" href="${pageContext.request.contextPath}/admin/MainHome.htm">KITCHEN</a>
+		            <a class="navbar-brand" href="<c:url value = '/admin/MainHome.htm' />">KITCHEN</a>
 		        </div>
 		        
 			    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu"> 
@@ -387,13 +529,11 @@ color: #fff
 					  </a>
 					  <ul class="dropdown-menu" >
 						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/mainfood.htm">Danh Mục Món Ăn</a></li>
-						
 						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/suggest.htm">Gợi Ý Hôm Nay</a></li>
-						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/findmeal.htm">Tìm Kiếm Món Ăn</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/findmeal.htm">Tìm Kiếm Món Ăn</a></li>
 						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/famousfood.htm">Món Ăn Phổ Biến</a></li>
-						
 						<li><a class="dropdown-item" href="#">Danh Sách Yêu Thích</a></li>
-						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/createmeal.htm">Tạo Món Ăn</a></li>  
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/createmeal.htm">Tạo Món Ăn</a></li> 
 					  </ul>
 					</li>
 					
@@ -415,7 +555,6 @@ color: #fff
 					</li>
 			  	</ul>
 			  	
-				
 				<div class="dropdown">
 	                <button  onclick="showDropdown()" class="login-btn"><i class="fa-solid fa-user"></i> ${sessionScope.nameuser}</button>
 	                	<div id="myDropdown" class="dropdown-content">
@@ -425,14 +564,13 @@ color: #fff
 	                
 	                
 	            </div>
-			
 				
 	    	</div>
             
         </div>
         </nav>
         
-    <script>
+        <script>
         function showDropdown() {
   	  	  document.getElementById("myDropdown").classList.toggle("show");
   	  	}
@@ -450,47 +588,69 @@ color: #fff
   	  	  }
   	  	}
   	 	</script>
-        
       </header>
 
     <main>
-
-        <div class="container py-5">
-            <div class="row">
-               
-                    <h1 class="text-center">DANH SÁCH CÁC MÓN ĂN PHỔ BIẾN</h1>
-                    
-                    <c:forEach items="${famousfood}" var="MEAL">
-					<div class="col-md-4">
-						<div class="image-container">
-							<div class="card">
-								<img class="meal-image card-img" src="${MEAL.hinhAnh}"
-									alt="Banner Image">
-								<div class="Name-meal">
-									<h5>${MEAL.tenMon}</h5>
-									<div class="btn"></div>
-									<a href="${pageContext.request.contextPath}/admin/Infor_Meal${MEAL.maMon}.htm"><button class="btn-view" type="button">Xem</button></a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</c:forEach>
-
-                   
-            </div>
-        </div>
-       
+        
+    <div class="container py-5">
+        <div class="row">
             
+                <div class="col-md-9">
+                    <div class="card">
+                        <img class="meal-detail card-img" src="${imgUrl}">
+                    </div>
+
+                    <div class="py-5">
+                        <div class="card-title">
+                            <p>
+                                ${tenMon}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card-detail">
+                        <h2 class="center">Cách Làm ${tenMon}</h2>
+                      
+                        <h3>Nguyên Liệu</h3>
+                         <c:forEach items="${NguyenLieu}" var="NGUYENLIEU_MONAN">
+					<h4>- ${NGUYENLIEU_MONAN.soLuong} ${NGUYENLIEU_MONAN.tenDonVi} ${NGUYENLIEU_MONAN.tenNguyenLieu}</h4>
+				</c:forEach>
+                        
+                      
+                        <h3>Cách Làm</h3>
+                        <c:forEach items="${BuocLam}" var="CT_BUOCLAM">
+					 <h4>${CT_BUOCLAM.tenBuoc}: ${CT_BUOCLAM.moTa}</h4>                         
+				</c:forEach>
+                       
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                <form action="saveandlike.htm" method="post">
+                    <div class="card">
+                   
+                      <input type="hidden" name="idmonan" value="${maMon}">
+                        <div>
+                            <button class="btn-save" name="action" value="luu" type="submit">Lưu</button>
+                        </div>
+                    
+                        <div>
+                            <button class="btn-like" type="submit" name="action" value="yeuThich">Thích</button>
+                            
+                        </div>
+                    </div>
+                    </form>
+                </div>
+
+            
+           
+        </div>
+    </div>
     </main>
 
     <footer>
         <div class="footer">
-            <!-- <div class="waves">
-                <div class="wave" id="wave1"></div>
-                <div class="wave" id="wave2"></div>
-                <div class="wave" id="wave3"></div>
-                <div class="wave" id="wave4"></div>
-            </div> -->
+            
             <ul class="social-icon">
                 <li class="social-icon__item"><a class="social-icon__link" href="#">
                     <ion-icon name="logo-facebook"></ion-icon>
@@ -508,7 +668,7 @@ color: #fff
               <ul class="menu">
                 <li class="menu__item"><a class="menu__link" href="#">Trang chủ</a></li>
                 <li class="menu__item"><a class="menu__link" href="#">Danh Mục</a></li>
-                <!-- <li class="menu__item"><a class="menu__link" href="#">Nấu Ăn</a></li> -->
+                
                 <li class="menu__item"><a class="menu__link" href="#">Tin Tức</a></li>
               </ul>
               <p class="text-center">&copy;All Rights Reserved</p>
@@ -517,11 +677,28 @@ color: #fff
         </div>
     </footer>
         
-       
-   
         
-        
-   
+   <script>
+function saveAndDisplayMessage(action, idmonan) {
+    $.ajax({
+        type: 'POST',
+        url: '/users/saveandlike',
+        data: { action: action, idmonan: idmonan },
+        success: function (response) {
+            // Xử lý kết quả trả về
+            showMessage(response.message);
+        },
+        error: function (error) {
+            console.error('Error:', error);
+        }
+    });
+}
+
+function showMessage(message) {
+    // Hiển thị thông báo nổi trên giao diện
+    alert(message);
+}
+</script>
 
 </body>
 </html>

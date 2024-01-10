@@ -48,7 +48,7 @@ public class USER_DAO {
 public ArrayList<USER> LISTUSER() throws SQLException {
    	ArrayList<USER> LIST_USERS = new ArrayList<>();
        // Thực hiện truy vấn để lấy tất cả các sản phẩm từ database
-       String query = "SELECT * FROM USERS";
+       String query = "SELECT * FROM USERS WHERE EMAIL != 'admin11@gmail.com'";
        PreparedStatement statement = connection.prepareStatement(query);
        ResultSet resultSet = statement.executeQuery();
        
@@ -63,9 +63,29 @@ public ArrayList<USER> LISTUSER() throws SQLException {
            USER user = new USER(maUser,name_user,email,pass);
           
            LIST_USERS.add(user);
+           
        }
        return LIST_USERS;
    }
+
+	public USER getUserDetailsById (int userId) throws SQLException {
+		USER userDetails = new USER();
+		try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM USERS WHERE ID_ND = ?")) {
+            statement.setInt(1, userId);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                userDetails = new USER();
+                userDetails.setMaUser(resultSet.getInt("ID_ND"));
+                userDetails.setTenUser(resultSet.getString("TENND"));
+                userDetails.setEmail(resultSet.getString("EMAIL"));
+                // Set other properties as needed
+            }
+        }
+
+        return userDetails;
+	}
+	
 
 public void UPDATE_USERS(String newpass,int maUser) throws SQLException {
 	 

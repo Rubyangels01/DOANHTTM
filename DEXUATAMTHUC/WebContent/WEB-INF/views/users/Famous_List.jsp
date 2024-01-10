@@ -13,9 +13,8 @@
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   	<!--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
-  	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  
     <title>KITCHEN.com</title>
     <style>
         /* Reset CSS */
@@ -353,6 +352,30 @@
             justify-content: center;
         }
         
+        .navbar-brand{
+        	color: #fff;
+        	font-size: 32px
+        }
+        .navbar-brand:hover{
+			color: #fff
+        }
+        .nav-link {
+        	color: #fff;
+        	font-size: 20px
+        }
+        .dropdown-item {
+        	border-bottom: 1px solid black;
+        	font-size: 20px;
+        	
+        }
+        
+        
+        
+        #menu .nav-link{ padding: 5px 20px }
+		#menu .nav-link:hover {color: black}
+		#menu .dropdown-item{ text-align: center; position: relative; padding: 10px;}
+		#menu .dropdown-item:after{ content: ""; position: absolute; width: 40%; height: 2px;}
+        
     </style>
 </head>
 <body>
@@ -370,7 +393,7 @@
             <div class="collapse navbar-collapse" id="menu">
 				<ul class="navbar-nav mx-auto">
 					<li class="nav-item">
-					  <a class="nav-link" aria-current="page" href="">Trang Chủ</a>
+					  <a class="nav-link" aria-current="page" href="${pageContext.request.contextPath}/users/Main.htm">Trang Chủ</a>
 					</li>
 					
 					<li class="nav-item dropdown">
@@ -381,11 +404,11 @@
 						
 						<li><a  class="dropdown-item" href="${pageContext.request.contextPath}/users/mainfood.htm">Danh Mục Món Ăn</a></li>
 						
-						<li><a class="dropdown-item" href="#">Gợi Ý Hôm Nay</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/suggest.htm">Gợi Ý Hôm Nay</a></li>
 						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/findmeal.htm">Tìm Kiếm Món Ăn</a></li>
-						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/suggest.htm">Món Ăn Phổ Biến</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/famousfood.htm">Món Ăn Phổ Biến</a></li>
 						
-						<li><a class="dropdown-item" href="#">Danh Sách Yêu Thích</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/search_user.htm">Tìm Kiếm Người Dùng</a></li>
 						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/createmeal.htm">Tạo Món Ăn</a></li>
 					  </ul>
 					</li>
@@ -435,7 +458,6 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
                     <h1 class="text-center">DANH SÁCH CÁC MÓN ĂN PHỔ BIẾN</h1>
                     
                     <c:forEach items="${famousfood}" var="MEAL">
@@ -452,80 +474,7 @@
 							</div>
 						</div>
 					</div>
-				</c:forEach>
-
-                    <div class="col-md-4">
-                        <div class="image-container">
-                            <div class="card">
-                                <img class="meal-image card-img" src="https://goeco.link/ZRylO" alt="Banner Image">
-                                <div class="Name-meal">
-                                    <h5>Sườn Xào Chua Ngọt</h5>
-                                    <!-- <a href="ChiTietMonAn.html">Xem chi tiết</a> -->
-                                    <div class="btn"></div>
-                                    <a href="ChiTietMonAn.html"><button class="btn-view" type="button">Xem</button></a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="image-container">
-                            <div class="card">
-                                <img class="meal-image card-img" src="https://goeco.link/oAFzB" alt="Banner Image">
-                                <div class="Name-meal">
-                                    <h5>Gà Xào Sả Ớt</h5>
-                                    <div class="btn"></div>
-                                    <a href="#"><button class="btn-view" type="button">Xem</button></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                
-
-                
-                    <div class="col-md-4">
-                        <div class="image-container">
-                            <div class="card">
-                                <img class="meal-image card-img" src="https://goeco.link/YpZGm" alt="Banner Image">
-                                <div class="Name-meal">
-                                    <h5>Bánh bao chiên</h5>
-                                    <div class="btn"></div>
-                                <a href="#"><button class="btn-view" type="button">Xem</button></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                        <div class="col-md-4">
-                            <div class="image-container">
-                                <div class="card">
-                                    <img class="meal-image card-img" src="https://goeco.link/ZRylO" alt="Banner Image">
-                                    <div class="Name-meal">
-                                        <h5>Sườn Xào Chua Ngọt</h5>
-                                        <div class="btn"></div>
-                                        <a href="ChiTietMonAn.html"><button class="btn-view" type="button">Xem</button></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="image-container">
-                                <div class="card">
-                                    <img class="meal-image card-img" src="https://goeco.link/oAFzB" alt="Banner Image">
-                                    <div class="Name-meal">
-                                        <h5>Gà Xào Sả Ớt</h5>
-                                        <div class="btn"></div>
-                                        <a href="#"><button class="btn-view" type="button">Xem</button></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    
-                    
-                </div>
+					</c:forEach>
                 
             </div>
         </div>

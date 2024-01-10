@@ -22,6 +22,13 @@ public class NGUYENLIEU {
 	public void setMaDonVi(int maDonVi) {
 		this.maDonVi = maDonVi;
 	}
+	
+	public String getTenDonVi() {
+		return tenDonVi;
+	}
+	public void setTenDonVi(String tenDonVi) {
+		this.tenDonVi = tenDonVi;
+	}
 	public NGUYENLIEU(String tenNguyenLieu, String tenDonVi, int maNguyenLieu, int maDonVi) {
 		super();
 		this.tenNguyenLieu = tenNguyenLieu;

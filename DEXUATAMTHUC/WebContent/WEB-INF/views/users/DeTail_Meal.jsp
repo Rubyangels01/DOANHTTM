@@ -511,6 +511,10 @@
         	font-size: 20px;
         	
         }
+         .btn-save.clicked {
+            background-color: yellow;
+            color: black;
+        }
         
         
         
@@ -547,11 +551,11 @@
 						
 						<li><a  class="dropdown-item" href="${pageContext.request.contextPath}/users/mainfood.htm">Danh Mục Món Ăn</a></li>
 						
-						<li><a class="dropdown-item" href="#">Gợi Ý Hôm Nay</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/suggest.htm">Gợi Ý Hôm Nay</a></li>
 						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/findmeal.htm">Tìm Kiếm Món Ăn</a></li>
-						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/suggest.htm">Món Ăn Phổ Biến</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/famousfood.htm">Món Ăn Phổ Biến</a></li>
 						
-						<li><a class="dropdown-item" href="#">Danh Sách Yêu Thích</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/search_user.htm">Tìm Kiếm Người Dùng</a></li>
 						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/createmeal.htm">Tạo Món Ăn</a></li>
 					  </ul>
 					</li>
@@ -612,6 +616,9 @@
                             <p>
                                 ${tenMon}
                             </p>
+                            <p>
+                            	 ${dokho} |  ${gio}:${phut} Phút
+                            </p>
                         </div>
                     </div>
 
@@ -638,11 +645,11 @@
                    
                       <input type="hidden" name="idmonan" value="${maMon}">
                         <div>
-                            <button class="btn-save" name="action" value="luu" type="submit">Lưu</button>
+                            <button class="btn-save" onclick="changeButtonText(this)" name="action" value="luu" type="submit">${message}</button>
                         </div>
                     
                         <div>
-                            <button class="btn-like" type="submit" name="action" value="yeuThich">Thích</button>
+                            <button class="btn-like" type="submit" name="action" value="yeuThich">${message1}</button>
                             
                         </div>
                     </div>
@@ -706,6 +713,18 @@ function showMessage(message) {
     alert(message);
 }
 </script>
+
+<script>
+        function changeButtonText(button) {
+            // Kiểm tra xem nút đã được nhấn chưa
+            if (!button.classList.contains('clicked')) {
+                // Thay đổi văn bản nút
+                button.innerHTML = 'Đã lưu';
+                // Thêm class để thay đổi màu nền
+                button.classList.add('clicked');
+            }
+        }
+    </script>
 
 </body>
 </html>

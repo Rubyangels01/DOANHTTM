@@ -35,6 +35,18 @@ public class Meal_Controller {
 	 int TIMKIEM,LUU = 0;
 	  int YEUTHICH,XEM = 1;
 	  
+	  @RequestMapping(value = "users/search_user", method = RequestMethod.GET) 
+	  public String SEARCH_USER (Model model) throws SQLException {
+		  	USER_DAO user_DAO = new USER_DAO();
+			model.addAttribute("ListUser", user_DAO.LISTUSER());
+			
+		  return "users/Find_Users";
+	  }
+	  
+	  
+		 
+	 
+	  
 	  @RequestMapping(value = "mainfood", method = RequestMethod.GET)
 		public String CATOGORYPAGE(Model model) throws SQLException {
 			MEAL_DAO meal_dao = new MEAL_DAO();
@@ -176,47 +188,86 @@ public class Meal_Controller {
 				request.setAttribute("maMon", meal.getMaMon());
 					request.setAttribute("imgUrl", meal.getHinhAnh());
 					request.setAttribute("tenMon", meal.getTenMon());
-					
+					request.setAttribute("dokho", mealDao.GET_RECIPE(meal.getMaMon()).getDoKho());
+					request.setAttribute("gio", mealDao.GET_RECIPE(meal.getMaMon()).getTime().getHour());
+					request.setAttribute("phut", mealDao.GET_RECIPE(meal.getMaMon()).getTime().getMinute());
 					 model.addAttribute("NguyenLieu",mealDao.GET_NGUYENLIEU(meal.getMaMon()));
 					 model.addAttribute("BuocLam",mealDao.GET_STEP(meal.getMaMon()));
 					 mealDao.VIEWORFIND(maUser, meal.getMaMon(),XEM);
+					 if(mealDao.CHECK_LIKEORSAVE(maUser, meal.getMaMon(), LUU) == 0)
+			    	 {
+			    		 request.setAttribute("message","LƯU" );
+			    		
+			    	 }
+			    	 else {
+			    		 request.setAttribute("message","ĐÃ LƯU" );
+			    		
+					}
+					 if(mealDao.CHECK_LIKEORSAVE(maUser, meal.getMaMon(), YEUTHICH) == 0)
+			    	 {
+			    		 request.setAttribute("message1","THÍCH" );
+			    		
+			    	 }
+			    	 else {
+			    		 request.setAttribute("message1","ĐÃ THÍCH" );
+			    		
+					}
 					return "users/DeTail_Meal";
 				}
 			} 
 		return "users/DeTail_Meal";
 		// trả về view hiển thị chi tiết sản phẩm
 	}
+	
+	int userString = 0;
+	@RequestMapping(value = "users/detail_user{userId}", method = RequestMethod.GET)
+	public String DETAIL_USER(@PathVariable int userId, Model model, HttpServletRequest request, HttpSession session) throws SQLException {
+	    USER_DAO user_DAO = new USER_DAO();
+	    MEAL_DAO meal_DAO = new MEAL_DAO();
+	    userString = userId;
+	    USER userDetails = user_DAO.getUserDetailsById(userId);
+	    String name = userDetails.getTenUser();
+	    
+	    request.setAttribute("name", name);
+	    model.addAttribute("list_created",meal_DAO.GET_LIST_CREATED(userId));
+	    request.setAttribute("countlike", meal_DAO.COUNT_LIKE_OF_USER(userId));
+	    return "users/Acount_DeTail";
+	}
+
+	
+	
 	@RequestMapping("users/saveandlike")
-	public ResponseEntity<String> saveAndLike(HttpSession session, @RequestParam("action") String action, @RequestParam("idmonan") int idmonan) throws SQLException {
+	public String saveAndLike(HttpSession session, @RequestParam("action") String action, @RequestParam("idmonan") int idmonan,HttpServletRequest request) throws SQLException {
 	    MEAL_DAO meal_DAO = new MEAL_DAO();
 	    Integer maUser = (Integer) session.getAttribute("maUser");
+	    
 //	    request.setAttribute("message", idmonan);
 	    boolean result_save = true;
 	    @SuppressWarnings("unused")
 		boolean result_like= true;
 	    if (action.equals("luu")) {
-	    	 if(meal_DAO.CHECK_LIKEORSAVE(maUser, idmonan, LUU) == 0)
+	    	 if(meal_DAO.CHECK_LIKEORSAVE(maUser, idmonan, 0) == 0)
 	    	 {
-	    		 meal_DAO.SAVEORLIKE(maUser, idmonan, LUU);
+	    		 request.setAttribute("message","ĐÃ LƯU" );
+	    		 meal_DAO.SAVEORLIKE(maUser, idmonan, 0);
 	    	 }
 	    	 else {
+	    		 request.setAttribute("message","ĐÃ LƯU" );
 	    		 result_save = false;
 			}
 	       
 	    } else if (action.equals("yeuThich")) {
 	    	 if(meal_DAO.CHECK_LIKEORSAVE(maUser, idmonan,1) == 0)
 	    	 {
+	    		 request.setAttribute("message1","ĐÃ THÍCH" );
 	    		 meal_DAO.SAVEORLIKE(maUser, idmonan, 1);
 	    	 }
 	    	 else {
+	    		 request.setAttribute("message1","ĐÃ THÍCH" );
 	    		 result_like = false;
 			}
 	    }
-	    if (result_save) {
-	    	return new ResponseEntity<>("Món đã được lưu!", HttpStatus.OK);         
-        } else {
-        	return new ResponseEntity<>("Lưu thành công!", HttpStatus.OK);           
-        }
+	    return "users/DeTail_Meal";
 	   
 
 	    
@@ -236,38 +287,47 @@ public class Meal_Controller {
 
 	    MEAL_DAO meal_DAO = new MEAL_DAO();
 	    ArrayList<MEAL> Meal_Find = new ArrayList<MEAL>();
+	   
 	    String input_search = request.getParameter("search");
-	    String[] ingredientArray = input_search.split(",\\s*");
-	    List<String> ingredientList = Arrays.asList(ingredientArray);
+	    if(input_search != null)
+	    {
+	    	String[] ingredientArray = input_search.split(",\\s*");
+		    List<String> ingredientList = Arrays.asList(ingredientArray);
 
-	    for (MEAL meal : meal_DAO.getAllMeal()) {
-	        boolean containsAll = true;
+		    for (MEAL meal : meal_DAO.getAllMeal()) {
+		        boolean containsAll = true;
 
-	        for(String nguyenlieu : ingredientList) {
-	            boolean containsIngredient = false;
-	            for (NGUYENLIEU_MONAN nglieumon : meal_DAO.GET_NGUYENLIEU(meal.getMaMon())) {
-	                if (nglieumon.getTenNguyenLieu().equalsIgnoreCase(nguyenlieu.trim())) {
-	                    containsIngredient = true;
-	                    break;
-	                }
-	            }
+		        for(String nguyenlieu : ingredientList) {
+		            boolean containsIngredient = false;
+		            for (NGUYENLIEU_MONAN nglieumon : meal_DAO.GET_NGUYENLIEU(meal.getMaMon())) {
+		                if (nglieumon.getTenNguyenLieu().equalsIgnoreCase(nguyenlieu.trim())) {
+		                    containsIngredient = true;
+		                    break;
+		                }
+		            }
 
-	            if (!containsIngredient) {
-	                containsAll = false;
-	                break;
-	            }
-	        }
+		            if (!containsIngredient) {
+		                containsAll = false;
+		                break;
+		            }
+		        }
 
-	        if (containsAll) {
-	            Meal_Find.add(meal);
-	        }
+		        if (containsAll) {
+		            Meal_Find.add(meal);
+		        }
+		    }
+		    model.addAttribute("message", meal_DAO.taoMaCongThuc());
+		    // Thực hiện các thao tác cần thiết với Meal_Find, ví dụ như gửi về frontend
+		    model.addAttribute("foundMeals", Meal_Find);
 	    }
-	    model.addAttribute("message", meal_DAO.taoMaCongThuc());
-	    // Thực hiện các thao tác cần thiết với Meal_Find, ví dụ như gửi về frontend
-	    model.addAttribute("foundMeals", Meal_Find);
+	    else {
+			request.setAttribute("message", "Bạn chưa nhập từ khoá!");
+		}
+	    
 
 	    return "users/List_Find";
 	}
+	
 	@RequestMapping("users/checkmeal")
 	public String CHECK_MEAL(HttpServletRequest request, Model model,HttpSession session,@ModelAttribute("ListNguyenLieu") ListNguyenLieu formModel) throws SQLException {
 
@@ -278,19 +338,15 @@ public class Meal_Controller {
 	    String name = request.getParameter("tenmon");
 	    String descri = request.getParameter("mota");
 	    String level = request.getParameter("dokho");
-	    
+	    String image = request.getParameter("hinhanh");
 	    // Chuyển đổi dữ liệu từ String sang int
 	    int hour = Integer.parseInt(request.getParameter("hour"));
 	    int minute = Integer.parseInt(request.getParameter("minute"));
-
-	    int typeMeal = Integer.parseInt(request.getParameter("loaimon"));
-	   
-
 	    
-
+	    int typeMeal = Integer.parseInt(request.getParameter("loaimon"));	   	    
 	    // Gọi hàm CREATE_RECIPE với các tham số đã lấy được
 	   meal_DAO.CREATE_RECIPE(hour, minute, level);
-	   meal_DAO.CREATE_MEAL(name, descri, typeMeal, maUser, meal_DAO.maCongThuc);
+	   meal_DAO.CREATE_MEAL(name,image, descri, typeMeal, maUser, meal_DAO.maCongThuc);
 	   for(NguyenLieu_SoLuong nglieumon : formModel.getCT_NguyenLieuList())
 	   {
 		   meal_DAO.CREATE_INGREDIENT(nglieumon.getIdNguyenLieu(),nglieumon.getSoLuong() );
@@ -299,14 +355,16 @@ public class Meal_Controller {
 	  {
 		  meal_DAO.CREATE_STEP(i+1,formModel.getCT_BuocLam().get(i).getMoTa());
 	  }	  
-	  
-//	  request.setAttribute("imgUrl", meal_DAO.getMealById(meal_DAO.maCongThuc));
+	  request.setAttribute("hour", hour);
+	  request.setAttribute("minute", minute);
+	  request.setAttribute("level", level);
+	  request.setAttribute("hinhanh", image);
 		request.setAttribute("tenMon", name);
 		
 		 model.addAttribute("NguyenLieu",meal_DAO.GET_INGREDIENT_FROM_RECIPE(meal_DAO.maCongThuc));
 		 model.addAttribute("BuocLam",meal_DAO.GET_STEP_FROM_IDRECIPE(meal_DAO.maCongThuc));
-//		 int idmon = meal_DAO.GET_IDMEAL(meal_DAO.maCongThuc);
-//		 meal_DAO.UPDATE_STATUSMEAL(idmon);
+		 
+
 	    return "users/Meal_Created";
 	}
 	
@@ -326,44 +384,108 @@ public class Meal_Controller {
 //		
 //		return "Find_Meal";
 //	}
+	
+//	@RequestMapping("users/searchmeal")
+//	public String CHECK_FIND_MEAL(HttpServletRequest request, Model model,HttpSession session) throws SQLException {
+//		
+//	    MEAL_DAO meal_DAO = new MEAL_DAO();	
+//	    String input_search = request.getParameter("search");
+//	    Integer maUser = (Integer) session.getAttribute("maUser");
+//	    ArrayList<MEAL> SORTED_LIST = meal_DAO.filterFoodList(meal_DAO.getAllMeal(),input_search);
+//	    if(SORTED_LIST == null || SORTED_LIST.isEmpty())
+//   	 {
+//	    	if(maUser == null)
+//	    	{
+//	    		request.setAttribute("message", "Danh sách tìm kiếm rỗng");
+//	    		return "Find_Meal";
+//	    	}
+//	    	else {
+//	    		request.setAttribute("message", "Danh sách tìm kiếm rỗng");
+//	    		return "users/Find_Meal";
+//			}
+//   		 
+//   		
+//   	 }else {
+//   		 
+//   		meal_DAO.sortFoodList(SORTED_LIST,input_search);
+// 	    request.setAttribute("input_search", input_search);
+// 	    model.addAttribute("FindMeal", SORTED_LIST);
+// 	    if(maUser == null)
+// 	    {
+// 	    	return "Find_Meal";
+// 	    }
+// 	    else {
+// 	    	for(MEAL meal : SORTED_LIST)
+// 	 	   {
+// 	 		   meal_DAO.VIEWORFIND(maUser, meal.getMaMon(), TIMKIEM);
+// 	 	   }
+// 	    	return "users/Find_Meal";
+//		}	    			
+//	}	    	    	    	    		    	    	   	   	   	    
+//	}
+	
+	@RequestMapping("/searchmeal")
+	public String CHECK_FIND_MEAL_PAGE(HttpServletRequest request, Model model,HttpSession session) throws SQLException {
+		
+		MEAL_DAO meal_DAO = new MEAL_DAO();	
+	    String input_search = request.getParameter("search");
+//	    Integer maUser = (Integer) session.getAttribute("maUser");
+	    if(input_search == null || input_search.isEmpty())
+	    {
+	    	request.setAttribute("message", "Vui lòng nhập từ khoá mà bạn muốn tìm kiếm!");
+	    }
+	    else {
+	    	 ArrayList<MEAL> SORTED_LIST = meal_DAO.filterFoodList(meal_DAO.getAllMeal(),input_search);
+	    	 if(SORTED_LIST == null || SORTED_LIST.isEmpty())
+	    	 {
+	    		 request.setAttribute("message", "Danh sách tìm kiếm rỗng");
+	    	 }
+	    	 meal_DAO.sortFoodList(SORTED_LIST,input_search);
+	 	    request.setAttribute("input_search", input_search);
+	 	    model.addAttribute("FindMeal", SORTED_LIST);
+//	 	   for(MEAL meal : SORTED_LIST)
+//	 	   {
+//	 		   meal_DAO.VIEWORFIND(meal.getMaMon(), TIMKIEM);
+//	 	   }
+		}
+	    return "Find_Meal";
+	}
+	
 	@RequestMapping("users/searchmeal")
 	public String CHECK_FIND_MEAL(HttpServletRequest request, Model model,HttpSession session) throws SQLException {
 		
 	    MEAL_DAO meal_DAO = new MEAL_DAO();	
 	    String input_search = request.getParameter("search");
 	    Integer maUser = (Integer) session.getAttribute("maUser");
-	    ArrayList<MEAL> SORTED_LIST = meal_DAO.filterFoodList(meal_DAO.getAllMeal(),input_search);
-	    if(SORTED_LIST == null || SORTED_LIST.isEmpty())
-   	 {
-	    	if(maUser == null)
-	    	{
-	    		request.setAttribute("message", "Danh sách tìm kiếm rỗng");
-	    		return "Find_Meal";
-	    	}
-	    	else {
-	    		request.setAttribute("message", "Danh sách tìm kiếm rỗng");
-	    		return "users/Find_Meal";
-			}
-   		 
-   		
-   	 }else {
-   		 
-   		meal_DAO.sortFoodList(SORTED_LIST,input_search);
- 	    request.setAttribute("input_search", input_search);
- 	    model.addAttribute("FindMeal", SORTED_LIST);
- 	    if(maUser == null)
- 	    {
- 	    	return "Find_Meal";
- 	    }
- 	    else {
- 	    	for(MEAL meal : SORTED_LIST)
- 	 	   {
- 	 		   meal_DAO.VIEWORFIND(maUser, meal.getMaMon(), TIMKIEM);
- 	 	   }
- 	    	return "users/Find_Meal";
-		}	    			
-	}	    	    	    	    		    	    	   	   	   	    
+	    if(input_search == null || input_search.isEmpty())
+	    {
+	    	request.setAttribute("message", "Vui lòng nhập từ khoá mà bạn muốn tìm kiếm!");
+	    }
+	    else {
+	    	 ArrayList<MEAL> SORTED_LIST = meal_DAO.filterFoodList(meal_DAO.getAllMeal(),input_search);
+	    	
+	    	 
+	    	 if(SORTED_LIST == null || SORTED_LIST.isEmpty())
+	    	 {
+	    		 request.setAttribute("message", "Danh sách tìm kiếm rỗng");
+	    	 }
+	    	 meal_DAO.sortFoodList(SORTED_LIST,input_search);
+	 	    request.setAttribute("input_search", input_search);
+	 	    model.addAttribute("FindMeal", SORTED_LIST);
+	 	    
+	 	   for(MEAL meal : SORTED_LIST)
+	 	   {
+	 		   meal_DAO.VIEWORFIND(maUser, meal.getMaMon(), TIMKIEM);
+	 		   
+	 	   }
+		}
+	    
+	    return "users/Find_Meal";
 	}
+	
+	
+	
+	
 
 	@RequestMapping(value = "users/mealuser", method = RequestMethod.GET)
 	public String MEAL_USER(Model model) throws SQLException {	
@@ -383,8 +505,18 @@ public class Meal_Controller {
 	public String DELETE(@PathVariable("id") int melaId, ModelMap model, HttpServletRequest request,HttpSession session)
 			throws SQLException {
 		MEAL_DAO meal_DAO = new MEAL_DAO();
+		 Integer maUser = (Integer) session.getAttribute("maUser");
+		    if (maUser == null) {
+		        
+		        return "users/Login";
+		    }
 		meal_DAO.DELETE_MEAL(melaId);	
-		return "users/MonAn_User";
+		
+		model.addAttribute("list_saved", meal_DAO.GET_LIST_SAVED(maUser, LUU));
+	    model.addAttribute("list_liked", meal_DAO.GET_LIST_SAVED(maUser, 1));
+	    model.addAttribute("list_created", meal_DAO.GET_LIST_CREATED(maUser));
+		
+		return "users/Acount_User";
 	}
 	
 	
@@ -400,7 +532,7 @@ public class Meal_Controller {
 		
 		
 		@RequestMapping(value = "users/acountuser", method = RequestMethod.GET)
-		public String LIST_SAVED(Model model, HttpSession session) throws SQLException {
+		public String LIST_SAVED(Model model, HttpSession session,HttpServletRequest request) throws SQLException {
 			MEAL_DAO mealDao = new MEAL_DAO();
 		    
 		    // Kiểm tra xem session có tồn tại giá trị "maUser" hay không
@@ -409,9 +541,13 @@ public class Meal_Controller {
 		        
 		        return "users/Login";
 		    }
+		    
 		    model.addAttribute("list_saved", mealDao.GET_LIST_SAVED(maUser, LUU));
 		    model.addAttribute("list_liked", mealDao.GET_LIST_SAVED(maUser, 1));
 		    model.addAttribute("list_created", mealDao.GET_LIST_CREATED(maUser));
+		    request.setAttribute("sizeluu", mealDao.GET_LIST_SAVED(maUser, LUU).size());
+			request.setAttribute("sizelike", mealDao.GET_LIST_SAVED(maUser, 1).size());
+			request.setAttribute("sizetao", mealDao.GET_LIST_CREATED(maUser).size());
 		    return "users/Acount_User";
 		}
 		

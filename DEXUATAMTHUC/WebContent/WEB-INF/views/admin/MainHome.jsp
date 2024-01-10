@@ -467,6 +467,27 @@ color: #fff
         	display: flex;
         }   
         
+         #suggestions {
+        position: absolute;
+        top: 256px;
+        width: 60%;
+        max-height: 200px;
+        left: 330px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        overflow-y: auto;
+       
+    }
+
+    #suggestions div {
+        padding: 8px;
+        cursor: pointer;
+        border:1px solid #ccc;
+    }
+    #suggestions div:hover {
+        background-color:#dbd9d9;
+        cursor: pointer;
+    }
           
 	</style>
 	
@@ -496,11 +517,11 @@ color: #fff
 					  </a>
 					  <ul class="dropdown-menu" >
 						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/mainfood.htm">Danh Mục Món Ăn</a></li>
-						<li><a class="dropdown-item" href="#">Gợi Ý Hôm Nay</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/suggest.htm">Gợi Ý Hôm Nay</a></li>
 						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/findmeal.htm">Tìm Kiếm Món Ăn</a></li>
 						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/famousfood.htm">Món Ăn Phổ Biến</a></li>
 						<li><a class="dropdown-item" href="#">Danh Sách Yêu Thích</a></li>
-						<li><a class="dropdown-item" href="<c:url value = '/users/Create_Food.htm' />">Tạo Món Ăn</a></li> 
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/createmeal.htm">Tạo Món Ăn</a></li> 
 					  </ul>
 					</li>
 					
@@ -525,7 +546,7 @@ color: #fff
 				<div class="dropdown">
 	                <button  onclick="showDropdown()" class="login-btn"><i class="fa-solid fa-user"></i> ${sessionScope.nameuser}</button>
 	                	<div id="myDropdown" class="dropdown-content">
-						    <a href="${pageContext.request.contextPath}/users/acountuser.htm">Tài Khoản</a>
+						    <a href="${pageContext.request.contextPath}/admin/accountadmin.htm">Tài Khoản</a>
 						    <a href="${pageContext.request.contextPath}/users/Login.htm">Logout</a>
   						</div>
 	                
@@ -540,9 +561,9 @@ color: #fff
 	
 	
 	<main> 
-        <div>
+     <!--   <div>
             
-            <img class="banner-image" src="https://s.pro.vn/zzx4" alt="Banner Image" class="w-100">
+            <img class="banner-image" src="https://bom.so/VidF5w" alt="Banner Image" class="w-100">
             
             <form id="search-form" class="example" style="margin:auto;max-width:300px">
 		        <input type="text" placeholder="Nhập các nguyên liệu..." name="search" id="search-input">
@@ -551,7 +572,23 @@ color: #fff
             
         </div>
         
-        
+         --> 
+         
+         <div>
+            
+            <img class="banner-image" src="https://bom.so/VidF5w" alt="Banner Image" class="w-100">
+            <form class="example" action="checksearch.htm" method = "post" style="margin:auto;max-width:300px">
+		    <input  type="text" name="search" id="searchInput" placeholder="Nhập các nguyên liệu..." >
+		    
+		    <div id="suggestions">
+		    
+		    </div>
+		   
+		    <button type="submit"><i class="fa fa-search"></i></button>
+			</form>
+
+            
+        </div>
   		
   		
         
@@ -562,16 +599,16 @@ color: #fff
                 </div>
 
                 <div class="col-md-3">
-					<a href="<c:url value = '/users/Category.htm' />"><h2 class="DESSERT image-container"><marquee direction="right">DESSERT FOOD</marquee></h2></a>
+					<a href="${pageContext.request.contextPath}/admin/mainfood.htm"><h2 class="DESSERT image-container"><marquee direction="right">DESSERT FOOD</marquee></h2></a>
                 </div>
 
                 <div class="col-md-3">
-                     <a href="<c:url value = '/users/Category.htm' />"><h2 class="BREAKFAST image-container"><marquee direction="left">BREAKFAST FOOD</marquee></h2></a>
+                     <a href="${pageContext.request.contextPath}/admin/mainfood.htm"><h2 class="BREAKFAST image-container"><marquee direction="left">BREAKFAST FOOD</marquee></h2></a>
                 </div>
 
                 <div class="col-md-3">
                 	<div class="">
-                    	<a href="<c:url value = '/users/Category.htm' />"><h2 class="FASTFOOD image-container"><marquee direction="right">FAST FOOD</marquee></h2></a>
+                    	<a href="${pageContext.request.contextPath}/admin/mainfood.htm"><h2 class="FASTFOOD image-container"><marquee direction="right">FAST FOOD</marquee></h2></a>
                     </div>
 
                 </div>
@@ -599,7 +636,7 @@ color: #fff
 										<h5>${MEAL.tenMon}</h5>
 										
 										<div class="btn"></div>
-										<a href="${pageContext.request.contextPath}/users/Infor_Meal${MEAL.maMon}.htm"><button class="btn-view" type="button">Xem</button></a>
+										<a href="${pageContext.request.contextPath}/admin/Infor_Meal${MEAL.maMon}.htm"><button class="btn-view" type="button">Xem</button></a>
 									</div>
 								</div>
 							</div>
@@ -712,5 +749,105 @@ color: #fff
   	  	  }
   	  	}
   	 	</script>
+  	 	
+  	 	
+  	 	 <script th:inline="javascript">
+    /* Truyền giá trị từ Thymeleaf vào JavaScript */
+    var nguyenlieuList = /*[[${nguyenlieuList}]]*/ [];
+</script>
+<script>
+    document.getElementById('searchInput').addEventListener('input', updateSuggestions);
+    let selectedIngredients = [];
+
+    function updateSuggestions() {
+        const searchInput = document.getElementById('searchInput');
+        const inputValue = searchInput.value.toLowerCase();
+        const suggestionsContainer = document.getElementById('suggestions');
+
+        // Lấy danh sách nguyên liệu từ chuỗi nhập vào
+        const inputIngredients = inputValue.split(',').map(ingredient => ingredient.trim());
+
+        // Lấy nguyên liệu cuối cùng trong danh sách để so sánh với database
+        const lastIngredient = inputIngredients[inputIngredients.length - 1];
+
+        // Kiểm tra nếu nguyên liệu cuối cùng là trống hoặc thanh tìm kiếm trống, ẩn thanh gợi ý
+        if (!lastIngredient) {
+            suggestionsContainer.style.display = 'none';
+            return;
+        }
+
+        // Mô phỏng danh sách gợi ý (thay thế bằng dữ liệu từ server)
+        const suggestions = ['Cà chua', 'Cà tím', 'Cà rốt', 'Bắp cải', 'Tỏi', 'Hành tây', 'Rau mùi','Ớt','Hành Tím', 'Bột Năng'
+        	,'Muối','Nước Mắm','Đường','Hạt Nêm','Nước Tương','Dầu Hào', 'Tiêu','Sườn', 'Thịt Heo','Cá Chép','Thịt Bò','Cá Diêu Hồng', 'Hành Lá',
+        	'Cải bẹ xanh', 'Cải ngọt', 'Sữa chua', 'Trái chuối', 'Sữa tươi'];
+
+        const filteredSuggestions = suggestions.filter(suggestion =>
+            suggestion.toLowerCase().includes(lastIngredient)
+        );
+
+        displaySuggestions(filteredSuggestions, suggestionsContainer);
+    }
+
+    function displaySuggestions(suggestions, container) {
+        container.innerHTML = '';
+
+        suggestions.forEach(suggestion => {
+            const suggestionItem = document.createElement('div');
+            suggestionItem.textContent = suggestion;
+            suggestionItem.addEventListener('click', () => selectSuggestion(suggestion));
+            container.appendChild(suggestionItem);
+        });
+
+        container.style.display = suggestions.length > 0 ? 'block' : 'none';
+    }
+
+    function selectSuggestion(selectedSuggestion) {
+        const searchInput = document.getElementById('searchInput');
+
+        // Tách chuỗi thành danh sách nguyên liệu
+        const inputIngredients = searchInput.value.split(',').map(ingredient => ingredient.trim());
+
+        // Loại bỏ nguyên liệu cuối cùng trong danh sách và thêm nguyên liệu đã chọn
+        inputIngredients.pop();
+        inputIngredients.push(selectedSuggestion);
+
+        // Gắn lại chuỗi đã thay đổi vào thanh tìm kiếm
+        searchInput.value = inputIngredients.join(', ') + ', ';
+
+        // Thêm nguyên liệu đã chọn vào danh sách
+        selectedIngredients.push(selectedSuggestion);
+
+        // Tự động focus vào ô tìm kiếm để có thể tiếp tục nhập liệu
+        searchInput.focus();
+
+        // Cập nhật gợi ý
+        updateSuggestions();
+    }
+
+    function hideSuggestions() {
+        const suggestionsContainer = document.getElementById('suggestions');
+        suggestionsContainer.innerHTML = '';
+    }
+</script>
+<script>
+        function showDropdown() {
+  	  	  document.getElementById("myDropdown").classList.toggle("show");
+  	  	}
+  	
+  	  	// Đóng dropdown nếu người dùng click bất kỳ nơi nào trên trang
+  	  	window.onclick = function(event) {
+  	  	  if (!event.target.matches('.login-btn')) {
+  	  	    var dropdowns = document.getElementsByClassName("dropdown-content");
+  	  	    for (var i = 0; i < dropdowns.length; i++) {
+  	  	      var openDropdown = dropdowns[i];
+  	  	      if (openDropdown.classList.contains('show')) {
+  	  	        openDropdown.classList.remove('show');
+  	  	      }
+  	  	    }
+  	  	  }
+  	  	}
+  	 	</script>
+    
+  	 	
 </body>
 </html>

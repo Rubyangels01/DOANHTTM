@@ -177,7 +177,7 @@
             /* top: 210px; */
             /* right: 250px; */
             padding: 10px;
-            margin-left: 15em;
+            margin-left: 20.5em;
             font-size: 17px;
             border: 1px solid #323232;
             /* float: left; */
@@ -190,7 +190,7 @@
 
         form.example i {
             position: absolute;
-            margin-left: 47em;
+            margin-left: 52.5em;
             color: gray;
             font-size: 17px;
             cursor: pointer;
@@ -408,7 +408,7 @@ color: #fff
 	 	<nav class="navbar navbar-expand-lg">
 			<div class="container">
 				<div>
-		            <a class="navbar-brand" href="${pageContext.request.contextPath}/users/Main.htm">KITCHEN</a>
+		            <a class="navbar-brand" href="${pageContext.request.contextPath}/">KITCHEN</a>
 		        </div>
 		        
 			    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu"> 
@@ -418,7 +418,7 @@ color: #fff
             <div class="collapse navbar-collapse" id="menu">
 				<ul class="navbar-nav mx-auto">
 					<li class="nav-item">
-					  <a class="nav-link" aria-current="page" href="">Trang Chủ</a>
+					  <a class="nav-link" aria-current="page" href="${pageContext.request.contextPath}/">Trang Chủ</a>
 					</li>
 					
 					<li class="nav-item dropdown">
@@ -427,14 +427,14 @@ color: #fff
 					  </a>
 					  <ul class="dropdown-menu" >
 						
-						<li><a  class="dropdown-item" href="${pageContext.request.contextPath}/users/mainfood.htm">Danh Mục Món Ăn</a></li>
+						<li><a  class="dropdown-item" href="${pageContext.request.contextPath}/mainfood.htm">Danh Mục Món Ăn</a></li>
 						
-						<li><a class="dropdown-item" href="#">Gợi Ý Hôm Nay</a></li>
-						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/findmeal.htm">Tìm Kiếm Món Ăn</a></li>
-						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/suggest.htm">Món Ăn Phổ Biến</a></li>
+				<!--  	<li><a class="dropdown-item" href="#">Gợi Ý Hôm Nay</a></li> -->	
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/findmeal.htm">Tìm Kiếm Món Ăn</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/suggest.htm">Món Ăn Phổ Biến</a></li>
 						
-						<li><a class="dropdown-item" href="#">Danh Sách Yêu Thích</a></li>
-						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/createmeal.htm">Tạo Món Ăn</a></li>
+					<!-- 	<li><a class="dropdown-item" href="#">Danh Sách Yêu Thích</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/createmeal.htm">Tạo Món Ăn</a></li> -->	
 					  </ul>
 					</li>
 					
@@ -484,7 +484,8 @@ color: #fff
         <div class="container">
             <div class="row">
                 
-                    <h1 class="text-center">DANH SÁCH TÌM KIẾM </h1>
+                    <h1 class="text-center" style = "margin-left: 1em">DANH SÁCH TÌM KIẾM </h1>
+                    
                     
                     <c:forEach items="${foundMeals}" var="MEAL">
 					<div class="col-md-4">

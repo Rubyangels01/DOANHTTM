@@ -582,20 +582,20 @@ color: #fff
         <div class="container py-5">
             <div class="row">
             	<div class="col-md-3">
-					<a href="<c:url value = '/Category.htm' />"><h2 class="MAIN image-container"><marquee diection="left">MAIN FOOD</marquee></h2></a>
+					<a href="${pageContext.request.contextPath}/mainfood.htm"><h2 class="MAIN image-container"><marquee diection="left">MAIN FOOD</marquee></h2></a>
                 </div>
 
                 <div class="col-md-3">
-					<a href="<c:url value = '/Category.htm' />"><h2 class="DESSERT image-container"><marquee direction="right">DESSERT FOOD</marquee></h2></a>
+					<a href="${pageContext.request.contextPath}/mainfood.htm"><h2 class="DESSERT image-container"><marquee direction="right">DESSERT FOOD</marquee></h2></a>
                 </div>
 
                 <div class="col-md-3">
-                     <a href="<c:url value = '/Category.htm' />"><h2 class="BREAKFAST image-container"><marquee direction="left">BREAKFAST FOOD</marquee></h2></a>
+                     <a href="${pageContext.request.contextPath}/mainfood.htm"><h2 class="BREAKFAST image-container"><marquee direction="left">BREAKFAST FOOD</marquee></h2></a>
                 </div>
 
                 <div class="col-md-3">
                 	<div class="">
-                    	<a href="<c:url value = '/Category.htm' />"><h2 class="FASTFOOD image-container"><marquee direction="right">FAST FOOD</marquee></h2></a>
+                    	<a href="${pageContext.request.contextPath}/mainfood.htm"><h2 class="FASTFOOD image-container"><marquee direction="right">FAST FOOD</marquee></h2></a>
                     </div>
 
                 </div>
@@ -763,7 +763,7 @@ color: #fff
         // Mô phỏng danh sách gợi ý (thay thế bằng dữ liệu từ server)
         const suggestions = ['Cà chua', 'Cà tím', 'Cà rốt', 'Bắp cải', 'Tỏi', 'Hành tây', 'Rau mùi','Ớt','Hành Tím', 'Bột Năng'
         	,'Muối','Nước Mắm','Đường','Hạt Nêm','Nước Tương','Dầu Hào', 'Tiêu','Sườn', 'Thịt Heo','Cá Chép','Thịt Bò','Cá Diêu Hồng', 'Hành Lá',
-        	'Cải bẹ xanh', 'Cải ngọt', 'Sữa chua', 'Trái chuối', 'Sữa tươi'];
+        	'Cải bẹ xanh', 'Cải ngọt', 'Sữa chua', 'Trái chuối', 'Sữa tươi','Thơm','Đậu Bắp','Cá Thác Lác','Thịt Băm','Cá Lóc','Dưa Leo','Mực','Dưa Leo','Xà Lách'];
 
         const filteredSuggestions = suggestions.filter(suggestion =>
             suggestion.toLowerCase().includes(lastIngredient)

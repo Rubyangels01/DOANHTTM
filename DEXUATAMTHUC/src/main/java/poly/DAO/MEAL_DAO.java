@@ -70,7 +70,66 @@ public class MEAL_DAO {
 		// Trong trường hợp không tìm thấy món ăn, trả về null hoặc xử lý tùy ý
 		return null;
 	}
-
+	
+	
+	
+//	public ArrayList <MEAL> getMealByTenND () throws SQLException {
+//		ArrayList<MEAL> LIST_MEAL = new ArrayList<>();
+//		
+//		String query = "SELECT MONAN.*, USERS.TENND\r\n"
+//				+ "FROM MONAN\r\n"
+//				+ "LEFT JOIN USERS ON USERS.ID_ND = MONAN.ID_ND\r\n"
+//				+ "WHERE MONAN.ID_ND = ?";
+//		try (PreparedStatement statement = connection.prepareStatement(query)) {
+//			try (ResultSet resultSet = statement.executeQuery()) {
+//				// Duyệt qua các dòng kết quả trả về và tạo đối tượng MEAL từ mỗi dòng
+//				while (resultSet.next()) {
+//					int maMon = resultSet.getInt("IDMON");
+//					String tenMon= resultSet.getString("TENMON");
+//					String hinhAnh = resultSet.getString("HINHANH");
+//					String moTa= resultSet.getString("MOTA");
+//					int idLoai = resultSet.getInt("IDLOAI");
+//					int idND = resultSet.getInt("ID_ND");
+//					String idCT = resultSet.getString("IDCONGTHUC");
+//					String tenND = resultSet.getString("TENND");
+//					
+//					MEAL meal = new MEAL(maMon, idLoai, idND, tenMon, hinhAnh, moTa, idCT, tenND);
+//					LIST_MEAL.add(meal);
+//				}
+//			}
+//		}
+//		return LIST_MEAL;
+//	}
+	
+//	public ArrayList<MEAL> getMealByTenND(int userID) throws SQLException{
+//		ArrayList<MEAL> LIST_MEAL = new ArrayList<>();
+//		String query = "SELECT MONAN.*, USERS.TENND\r\n"
+//				+ "FROM MONAN\r\n"
+//				+ "INNER JOIN USERS ON USERS.ID_ND = MONAN.ID_ND\r\n"
+//				+ "WHERE MONAN.ID_ND = ?";
+//		try (PreparedStatement statement = connection.prepareStatement(query)) {
+//			statement.setInt(1, userID);
+//
+//			try (ResultSet resultSet = statement.executeQuery()) {
+//				// Duyệt qua các dòng kết quả trả về và tạo đối tượng MEAL từ mỗi dòng
+//				while (resultSet.next()) {
+//					int maMon = resultSet.getInt("IDMON");
+//					String tenMon = resultSet.getString("TENMON");
+//					String hinhAnh = resultSet.getString("HINHANH");
+//					String moTa = resultSet.getString("MOTA");
+//					int idLoai = resultSet.getInt("IDLOAI");
+//					int idND = resultSet.getInt("ID_ND");
+//					String idCT = resultSet.getString("IDCONGTHUC");
+//					String tenND = resultSet.getString("TENND");
+//					MEAL meal = new MEAL(maMon, idLoai, idND, tenMon, hinhAnh, moTa, idCT, tenND);
+//					LIST_MEAL.add(meal);
+//				}
+//			}
+//		}
+//
+//		return LIST_MEAL;
+//	}
+	
 	public ArrayList<MEAL> getAllMeal() throws SQLException {
 		ArrayList<MEAL> Meal_List = new ArrayList<>();
 		// Thực hiện truy vấn để lấy tất cả các sản phẩm từ database
@@ -87,12 +146,15 @@ public class MEAL_DAO {
 			int idLoai = resultSet.getInt("IDLOAI");
 			int idND = resultSet.getInt("ID_ND");
 			String idCT = resultSet.getString("IDCONGTHUC");
+			
 			MEAL meal = new MEAL(maMon, idLoai, idND, tenMon, hinhAnh, moTa, idCT);
 			Meal_List.add(meal);
 		}
 		return Meal_List;
 	}
 
+	
+	
 	public ArrayList<MEAL> getTypeFood(int typefood) throws SQLException {
 		ArrayList<MEAL> LIST_FOOD = new ArrayList<>();
 
@@ -381,7 +443,7 @@ public class MEAL_DAO {
 			int maMon = entry.getKey();
 			int diem = entry.getValue();
 
-			if (diem > 12) {
+			if (diem > 30) {
 				MEAL meal = getMealById(maMon);
 				sortedMeals.add(meal);
 			}									
@@ -399,7 +461,11 @@ public class MEAL_DAO {
 				String[] keywords = suggestedMeal.getTenMon().toLowerCase().split("\\s+");
 				for (String keyword : keywords) {
 					if (meal.getTenMon().toLowerCase().contains(keyword)) {
-						relatedMeals.add(meal);
+						if(!relatedMeals.contains(meal))
+						{
+							relatedMeals.add(meal);
+						}
+						
 					}
 				}				
 
@@ -422,27 +488,29 @@ public class MEAL_DAO {
 	    List<MEAL> mixedList = new ArrayList<>();
 
 	    // Lấy danh sách theo sở thích và loại
-	    List<MEAL> preferenceList = getRandomList(getRelatedMeals(idnd, typefood), 0.3);
-	    List<MEAL> typeList = getRandomList(getTypeFood(typefood), 0.7);
+	    if(getRelatedMeals(idnd, typefood).size() == 0)
+	    {
+	    	mixedList.addAll(getTypeFood(typefood));
+	    }else {
+	    	List<MEAL> preferenceList = getRandomList(getRelatedMeals(idnd, typefood), 0.3);
+		    List<MEAL> typeList = getRandomList(getTypeFood(typefood), 0.7);
+		    
+		    // Kết hợp hai danh sách và loại bỏ món ăn trùng lặp
+		    for (MEAL meal : preferenceList) {
+		        if (!mixedList.contains(meal)) {
+		            mixedList.add(meal);
+		        }
+		       
+		    }
 
-	    // Kết hợp hai danh sách và loại bỏ món ăn trùng lặp
-	    for (MEAL meal : preferenceList) {
-	        if (!mixedList.contains(meal)) {
-	            mixedList.add(meal);
-	        }
-	        else {
-				continue;
-			}
-	    }
-
-	    for (MEAL meal : typeList) {
-	        if (!mixedList.contains(meal)) {
-	            mixedList.add(meal);
-	        }
-	        else {
-				continue;
-			}
-	    }
+		    for (MEAL meal : typeList) {
+		        if (!mixedList.contains(meal)) {
+		            mixedList.add(meal);
+		        }
+		       
+		    }
+		}
+	    
 
 	    return mixedList;
 	}
@@ -527,7 +595,7 @@ public class MEAL_DAO {
 
 		return LIST_BUOCLAM;
 	}
-
+	// HÀM LƯU MÓN ĂN
 	public void SAVEORLIKE(int idnd, int idmon, int action) throws SQLException {
 		String query = "INSERT INTO DS_YEUTHICH (ID_ND, IDMON,HANHDONG) VALUES (?, ?, ?)";
 		try (PreparedStatement statement = connection.prepareStatement(query)) {
@@ -617,14 +685,15 @@ public class MEAL_DAO {
 	}
 
 	// Hàm TẠO MÓN ĂN
-	public void CREATE_MEAL(String tenMon, String moTa, int maLoai, int maND, String idCongThuc) throws SQLException {
-		String query = "INSERT INTO MONAN (TENMON,MOTA,IDLOAI,ID_ND,IDCONGTHUC) VALUES (?, ?, ?, ?, ?)";
+	public void CREATE_MEAL(String tenMon,String hinhanh, String moTa, int maLoai, int maND, String idCongThuc) throws SQLException {
+		String query = "INSERT INTO MONAN (TENMON,HINHANH,MOTA,IDLOAI,ID_ND,IDCONGTHUC) VALUES (?,?, ?, ?, ?, ?)";
 		try (PreparedStatement statement = connection.prepareStatement(query)) {
 			statement.setString(1, tenMon);
-			statement.setString(2, moTa);
-			statement.setInt(3, maLoai);
-			statement.setInt(4, maND);
-			statement.setString(5, maCongThuc);
+			statement.setString(2, hinhanh);
+			statement.setString(3, moTa);
+			statement.setInt(4, maLoai);
+			statement.setInt(5, maND);
+			statement.setString(6, maCongThuc);
 
 			statement.executeUpdate();
 		}
@@ -764,28 +833,15 @@ public class MEAL_DAO {
 
 	        // Thực hiện truy vấn để lấy tất cả các sản phẩm nước hoa nam từ database
 	        String query = "SELECT MONAN.* FROM DS_YEUTHICH, MONAN\r\n"
-	        		+ "		        		WHERE MONAN.ID_ND = DS_YEUTHICH.ID_ND \r\n"
-	        		+ "								AND MONAN.IDMON = DS_YEUTHICH.IDMON\r\n"
-	        		+ "								AND DS_YEUTHICH.ID_ND = ? AND DS_YEUTHICH.TRANGTHAI = ?";
+	        		+ "	        		WHERE MONAN.IDMON = DS_YEUTHICH.IDMON 	        		\r\n"
+	        		+ "	        		AND DS_YEUTHICH.ID_ND = ? AND DS_YEUTHICH.HANHDONG = ?";
 	        try (PreparedStatement statement = connection.prepareStatement(query)) {
 	            statement.setInt(1, maUser);
 	            statement.setInt(2, action);
 	           
 
 	            try (ResultSet resultSet = statement.executeQuery()) {
-	                // Duyệt qua các dòng kết quả trả về và tạo đối tượng MEAL từ mỗi dòng
-//	                while (resultSet.next()) {
-//	                	int maMon = resultSet.getInt("IDMON");
-//	                    String tenMon = resultSet.getString("TENMON");
-//	                    String hinhAnh = resultSet.getString("HINHANH");
-//	                    String moTa = resultSet.getString("MOTA");
-//	                    int idLoai = resultSet.getInt("IDLOAI");
-//	                    int idND = resultSet.getInt("ID_ND");
-//	                    int idCT = resultSet.getInt("IDCONGTHUC");
-//	                    
-//	                    MEAL meal = new MEAL(maMon, idLoai, idND, idCT, tenMon, hinhAnh, moTa);
-//	                    LIST_MEAL.add(meal);
-//	                }
+	                
 	            	while (resultSet.next()) {
 	    	 			int maMon = resultSet.getInt("IDMON");
 	    	 			String tenMon = resultSet.getString("TENMON");
@@ -813,19 +869,7 @@ public class MEAL_DAO {
 	            statement.setInt(1, maUser);
 	            
 	            try (ResultSet resultSet = statement.executeQuery()) {
-	                // Duyệt qua các dòng kết quả trả về và tạo đối tượng MEAL từ mỗi dòng
-//	                while (resultSet.next()) {
-//	                	int maMon = resultSet.getInt("IDMON");
-//	                    String tenMon = resultSet.getString("TENMON");
-//	                    String hinhAnh = resultSet.getString("HINHANH");
-//	                    String moTa = resultSet.getString("MOTA");
-//	                    int idLoai = resultSet.getInt("IDLOAI");
-//	                    int idND = resultSet.getInt("ID_ND");
-//	                    int idCT = resultSet.getInt("IDCONGTHUC");
-//	                    
-//	                    MEAL meal = new MEAL(maMon, idLoai, idND, tenMon, hinhAnh, moTa , idCT);
-//	                    LIST_MEAL.add(meal);
-//	                }
+
 	            	while (resultSet.next()) {
 	    	 			int maMon = resultSet.getInt("IDMON");
 	    	 			String tenMon = resultSet.getString("TENMON");
@@ -843,6 +887,31 @@ public class MEAL_DAO {
 
 	        return LIST_MEAL;
 	    }
+	    // HÀM ĐẾM SỐ LƯỢNG YÊU THÍCH CỦA 1 NGƯỜI DÙNG 
+	    public int COUNT_LIKE_OF_USER(int idnd) throws SQLException {
+
+			int count = -1;
+			
+				String query = "SELECT COUNT(DS_YEUTHICH.HANHDONG) AS SOLUONGYEUTHICH\r\n"
+						+ "	FROM DS_YEUTHICH WHERE DS_YEUTHICH.HANHDONG = 1 AND DS_YEUTHICH.ID_ND = ? AND DS_YEUTHICH.TRANGTHAI = 1";
+
+				try (PreparedStatement statement = connection.prepareStatement(query)) {
+					
+					statement.setInt(1, idnd); 
+					
+					
+					try (ResultSet resultSet = statement.executeQuery()) {
+						
+						if (resultSet.next()) {
+							count = resultSet.getInt("SOLUONGYEUTHICH");
+						}
+					}
+				}
+			
+			
+
+			return count;
+		}
 	    // HÀM LẤY RA MÓN ĂN CHƯA ĐƯỢC DUYỆT (DUYỆT LÀ 1, CÒN CHƯA DUYỆT LÀ 0)
 //	    public ArrayList<MEAL> GET_STATUS_MEAL() throws SQLException {
 //			ArrayList<MEAL> LIST_MEAL = new ArrayList<>();
@@ -874,27 +943,32 @@ public class MEAL_DAO {
 //
 //			return LIST_MEAL;
 //		}
-//	    // HÀM LẤY ID MÓN ĂN THEO ID CÔNG THỨC
-//	    public int GET_IDMEAL(String idcongthuc) throws SQLException {
-//			int result = -1;
-//
-//			// Thực hiện truy vấn để lấy tất cả các sản phẩm nước hoa nam từ database
-//			String query = "SELECT IDMON FROM MONAN WHERE IDCONGTHUC = ?";
-//			try (PreparedStatement statement = connection.prepareStatement(query)) {
-//				statement.setString(1, idcongthuc);
-//				
-//
-//				try (ResultSet resultSet = statement.executeQuery()) {
-//					// Duyệt qua các dòng kết quả trả về và tạo đối tượng MEAL từ mỗi dòng
-//					while (resultSet.next()) {
-//						result = resultSet.getInt("Result");
-//
-//					}
-//				}
-//			}
-//
-//			return result;
-//		}
+	    // HÀM LẤY ID MÓN ĂN THEO ID CÔNG THỨC
+	    public CONGTHUC GET_RECIPE(int idmon) throws SQLException {
+	    	
+	    	CONGTHUC congthuc = new CONGTHUC();
+			String query = "EXEC GET_RECIPE @IDMON = ?";
+			try (PreparedStatement statement = connection.prepareStatement(query)) {
+				statement.setInt(1, idmon);
+				
+
+				try (ResultSet resultSet = statement.executeQuery()) {
+					// Duyệt qua các dòng kết quả trả về và tạo đối tượng MEAL từ mỗi dòng
+					while (resultSet.next()) {
+						
+						String dokho = resultSet.getString("DOKHO");
+						int hour = resultSet.getInt("GIO");
+						int minute = resultSet.getInt("PHUT");
+						TIME time = new TIME(hour, minute);
+						
+						congthuc.setDoKho(dokho);
+						congthuc.setTime(time);
+					}
+				}
+			}
+
+			return congthuc;
+		}
 //	    //HÀM UPDATE TRẠNG THÁI MÓN ĂN
 //	    public void UPDATE_STATUSMEAL(int idmon) throws SQLException {
 //			String query = "UPDATE MONAN SET MONAN.TRANGTHAI = 0 WHERE MONAN.IDMON  = ?";

@@ -505,12 +505,12 @@ p:hover {
 					  <ul class="dropdown-menu" >
 						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/mainfood.htm">Danh Mục Món Ăn</a></li>
 						
-						<li><a class="dropdown-item" href="#">Gợi Ý Hôm Nay</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/suggest.htm">Gợi Ý Hôm Nay</a></li>
 						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/findmeal.htm">Tìm Kiếm Món Ăn</a></li>
 						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/famousfood.htm">Món Ăn Phổ Biến</a></li>
-						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/createmeal.htm">Tạo Món Ăn</a></li>
+						
 						<li><a class="dropdown-item" href="#">Danh Sách Yêu Thích</a></li>
-						<li><a class="dropdown-item" href="#">Tạo Món Ăn</a></li> 
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/createmeal.htm">Tạo Món Ăn</a></li> 
 					  </ul>
 					</li>
 					
@@ -533,9 +533,15 @@ p:hover {
 			  	</ul>
 			  	
 				
-				<div>
-					<button class="login-btn"><i class="fa-solid fa-user"></i> ${sessionScope.nameuser}</button>
-				</div>
+				<div class="dropdown">
+	                <button  onclick="showDropdown()" class="login-btn"><i class="fa-solid fa-user"></i> ${sessionScope.nameuser}</button>
+	                	<div id="myDropdown" class="dropdown-content">
+						    <a href="${pageContext.request.contextPath}/admin/accountadmin.htm">Tài Khoản</a>
+						    <a href="${pageContext.request.contextPath}/users/Login.htm">Logout</a>
+  						</div>
+	                
+	                
+	            </div>
 			
 				
 	    	</div>
@@ -543,7 +549,24 @@ p:hover {
         </div>
         </nav>
         
-        
+        <script>
+        function showDropdown() {
+  	  	  document.getElementById("myDropdown").classList.toggle("show");
+  	  	}
+  	
+  	  	// Đóng dropdown nếu người dùng click bất kỳ nơi nào trên trang
+  	  	window.onclick = function(event) {
+  	  	  if (!event.target.matches('.login-btn')) {
+  	  	    var dropdowns = document.getElementsByClassName("dropdown-content");
+  	  	    for (var i = 0; i < dropdowns.length; i++) {
+  	  	      var openDropdown = dropdowns[i];
+  	  	      if (openDropdown.classList.contains('show')) {
+  	  	        openDropdown.classList.remove('show');
+  	  	      }
+  	  	    }
+  	  	  }
+  	  	}
+  	 	</script>
         
       </header>
 
@@ -564,7 +587,7 @@ p:hover {
 								<div class="Name-meal">
 									<h5>${MEAL.tenMon}</h5>
 									<div class="btn"></div>
-									<a href="${pageContext.request.contextPath}/users/Infor_Meal${MEAL.maMon}.htm"><button class="btn-view" type="button">Xem</button></a>
+									<a href="${pageContext.request.contextPath}/admin/Infor_Meal${MEAL.maMon}.htm"><button class="btn-view" type="button">Xem</button></a>
 								</div>
 							</div>
 						</div>

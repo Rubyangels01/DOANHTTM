@@ -476,7 +476,7 @@ color: #fff
 	 	<nav class="navbar navbar-expand-lg">
 			<div class="container">
 				<div>
-		            <a class="navbar-brand" href="${pageContext.request.contextPath}/users/Main.htm">KITCHEN</a>
+		            <a class="navbar-brand" href="${pageContext.request.contextPath}/">KITCHEN</a>
 		        </div>
 		        
 			    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu"> 
@@ -548,7 +548,7 @@ color: #fff
     	<div class="container py-5">
             <div class="col-md-12">
                 <h1 class="text-center"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/561/561611.png" class="w-100">KITCHEN</h1>
-                <form class="example" action="users/searchmeal.htm" method="post">
+                <form class="example" action="searchmeal.htm" method="post">
                     <input type="text" value="${input_search}" placeholder="Nhập tên món ..." name="search">
                     <button type="submit"><i class="fa fa-search"></i></button>
                 </form>
@@ -582,7 +582,7 @@ color: #fff
                                         <i class="fa-solid fa-heart"></i>
 
                                     </div>
-									<a href="${pageContext.request.contextPath}/users/Infor_Meal${MEAL.maMon}.htm"><button class="btn-view" type="button">Xem</button></a>
+									<a href="${pageContext.request.contextPath}/Infor_Meal${MEAL.maMon}.htm"><button class="btn-view" type="button">Xem</button></a>
 								</div>
 							</div>
 						</div>

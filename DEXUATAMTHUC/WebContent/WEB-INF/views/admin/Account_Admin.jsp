@@ -346,16 +346,13 @@ font-family: 'Montserrat', sans-serif;
             border: 1px solid #333;
             text-align: center;
             /* margin-left: 8em; */
-            /* margin-right: 2em;
-            width: 100%; */
+            margin-right: 2em;
+            width: 100%;
             font-size: 18px;
             font-weight: bold;
-            display: block;
-            
-	        justify-content: right;
+           
             
         }
-        
 
         .btn-view:hover
         {
@@ -656,109 +653,7 @@ color: #fff
         p {
             color: #323232;
         }
-
-        .container_swap {
-	        width: 100%;
-        }   
-        .container_swap1 {
-	        width: 100%;
-        }  
-        .div_left1 {
-            width: 40%;
-            float: left;
-            text-align: center;
-            /* padding: 5px 30px 5px 30px; */
-            border-radius: 10px;
-            margin-bottom: 1em;
-            
-            margin-right: 0.5em;
-        }   
-        .div_left1 a {
-            text-decoration: none;
-        }
-
-        .div_right1 {
-            width: 40%;
-            float: right;
-            text-align: center;
-            /* padding: 5px 30px 5px 30px; */
-            border-radius: 10px;
-            margin-bottom: 1em;
-           
-        } 
-        .div_right1 a {
-            text-decoration: none;
-        }
-
-        .div_right1 button {
-    color: black;
-    background-color: red;
-    text-decoration: none;
-}
-.div_left1 button {
-    color: black;
-    background-color: rgb(103, 218, 103);
-    text-decoration: none;
-}
-
-.div_center {
-	width: 30%;
-	float: right;
-	text-align: center;
-	/* padding: 5px 30px 5px 30px; */
-	border-radius: 10px;
-	margin-bottom: 1em;
-    /* margin-right: 0.5em; */
-    
-}
-
-.div_center button {
-    color: black;
-    background-color: red;
-}
-.div_left button {
-    color: black;
-    background-color: rgb(103, 218, 103);
-}
-
-
-
-.div_left {
-  
-	width: 30%;
-	float: left;
-	text-align: center;
-	/* padding: 5px 30px 5px 30px; */
-	border-radius: 10px;
-	margin-bottom: 1em;
-    
-	margin-right: 0.5em;
-    
-}
-
-
-
-.div_right {
-	width: 30%;
-    margin-left: 0.7em;
-	float: left;
-	text-align: center;
-	/* padding: 5px 30px 5px 30px; */
-	border-radius: 10px;
-	/* margin-left: 0.2em; */
-	/* background-color: red; */
-	
-}
-        .div_left a {
-            text-decoration: none;
-        }
-        .div_right a {
-            text-decoration: none;
-        }
-
-        .div_center a {
-            text-decoration: none;
-        }
+        
        
 	</style>
 
@@ -768,7 +663,7 @@ color: #fff
 	 	<nav class="navbar navbar-expand-lg">
 			<div class="container">
 				<div>
-		            <a class="navbar-brand" href="${pageContext.request.contextPath}/users/Main.htm">KITCHEN</a>
+		            <a class="navbar-brand" href="<c:url value = '/admin/MainHome.htm' />">KITCHEN</a>
 		        </div>
 		        
 			    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu"> 
@@ -778,7 +673,7 @@ color: #fff
             <div class="collapse navbar-collapse" id="menu">
 				<ul class="navbar-nav mx-auto">
 					<li class="nav-item">
-					  <a class="nav-link" aria-current="page" href="${pageContext.request.contextPath}/users/Main.htm">Trang Chủ</a>
+					  <a class="nav-link" aria-current="page" href="${pageContext.request.contextPath}/admin/MainHome.htm">Trang Chủ</a>
 					</li>
 					
 					<li class="nav-item dropdown">
@@ -786,15 +681,25 @@ color: #fff
 						Danh Mục
 					  </a>
 					  <ul class="dropdown-menu" >
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/mainfood.htm">Danh Mục Món Ăn</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/suggest.htm">Gợi Ý Hôm Nay</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/findmeal.htm">Tìm Kiếm Món Ăn</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/famousfood.htm">Món Ăn Phổ Biến</a></li>
+						<li><a class="dropdown-item" href="#">Danh Sách Yêu Thích</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/createmeal.htm">Tạo Món Ăn</a></li> 
+					  </ul>
+					</li>
+					
+					<li class="nav-item dropdown">
+					  <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+						Quản Lý
+					  </a>
+					  <ul class="dropdown-menu" >
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/qlndung.htm">Quản Lý Người Dùng</a></li>
+						<li><a class="dropdown-item" href="#">Quản Lý Bài Đăng</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/qlmonan.htm">Quản Lý Món Ăn</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/admin/qlDM.htm">Quản Lý Danh Mục</a></li>
 						
-						<li><a  class="dropdown-item" href="${pageContext.request.contextPath}/users/mainfood.htm">Danh Mục Món Ăn</a></li>
-						
-						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/suggest.htm">Gợi Ý Hôm Nay</a></li>
-						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/findmeal.htm">Tìm Kiếm Món Ăn</a></li>
-						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/famousfood.htm">Món Ăn Phổ Biến</a></li>
-						
-						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/search_user.htm">Tìm Kiếm Người Dùng</a></li>
-						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/users/createmeal.htm">Tạo Món Ăn</a></li>
 					  </ul>
 					</li>
 					
@@ -803,17 +708,15 @@ color: #fff
 					</li>
 			  	</ul>
 			  	
-				
 				<div class="dropdown">
 	                <button  onclick="showDropdown()" class="login-btn"><i class="fa-solid fa-user"></i> ${sessionScope.nameuser}</button>
 	                	<div id="myDropdown" class="dropdown-content">
-						    <a href="${pageContext.request.contextPath}/users/acountuser.htm">Tài Khoản</a>
+						    <a href="${pageContext.request.contextPath}/admin/accountadmin.htm">Tài Khoản</a>
 						    <a href="${pageContext.request.contextPath}/users/Login.htm">Logout</a>
   						</div>
 	                
 	                
 	            </div>
-			
 				
 	    	</div>
             
@@ -895,7 +798,7 @@ color: #fff
          <div id="DaLuu" class="tabcontent">
                 <div class="row">
                     <div class="col-md-4">
-                        <span style="font-size: 20px; font-weight: bold;">${sizeluu} Món</span>
+                        <span style="font-size: 20px; font-weight: bold;">0 món</span>
                     </div>
 
                     <div class="col-md-8">
@@ -927,23 +830,9 @@ color: #fff
 											alt="${MEAL.tenMon}">
 										<div class="Name-meal">
 											<h5>${MEAL.tenMon}</h5>
-											<!-- <div class="btn"></div>
-											<a href="${pageContext.request.contextPath}/users/Infor_Meal${MEAL.maMon}.htm"><button class="btn-view" type="button">Xem</button></a> -->
-                                            <div class="container_swap1">
-                                                <div class="div_left1">
-                                                    <a href="${pageContext.request.contextPath}/users/Infor_Meal${MEAL.maMon}.htm">
-                                                        <button class="btn-view" type="button">Xem</button>
-                                                    </a>
-                                                </div>
-    
-                                                <div class="div_right1">
-                                                    <a href="#">
-                                                        <button class="btn-view" type="button">Bỏ Lưu</button>
-                                                    </a>
-                                                </div>
-
-                                            </div>
-                                        </div>
+											<div class="btn"></div>
+											<a href="${pageContext.request.contextPath}/users/Infor_Meal${MEAL.maMon}.htm"><button class="btn-view" type="button">Xem</button></a>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -963,30 +852,9 @@ color: #fff
             
             <!-- tab món của tôi -->
 			<div id="MonCuaToi" class="tabcontent">
-				<div class="container">
+				<div class="container py-5">
             		<div class="row">
-                 <div class="col-md-4">
-                        <span style="font-size: 20px; font-weight: bold;">${sizetao} Món</span>
-                    </div>
-
-                    <div class="col-md-8">
-                        
-                        <div id="search">
-                            <div class="search-bar">
-                                <div class="search-input">
-                                    
-                                    <input type="text" placeholder="Tìm kiếm" name="search" id="search-input" style="width: 300px;">
-                                    <button class="btn" type="submit" id="search-button"><i class="fa fa-search"></i></button>
-                                </div> 
-                            </div>               
-                        </div>
-                        
-                        
-                    </div>  
-                    <br>
-                    <br>
-                     <br>
-                    
+                
                     	<h6 class="text-center">DANH SÁCH CÁC MÓN ĂN ĐÃ TẠO</h6>
                     
                     
@@ -998,27 +866,8 @@ color: #fff
 										alt="${MEAL.tenMon}">
 									<div class="Name-meal">
 										<h5>${MEAL.tenMon}</h5>
-                                        <div class="container_swap">
-                                            <div class="div_left">
-                                                <a href="${pageContext.request.contextPath}/users/Infor_Meal${MEAL.maMon}.htm">
-                                                    <button class="btn-view" type="button">Xem</button>
-                                                </a>
-                                            </div>
-
-                                            <div class="div_right">
-                                                <a href="#">
-                                                    <button class="btn-view" type="button">Sửa</button>
-                                                </a>
-                                            </div>
-
-                                            <div class="div_center">
-                                                <a href="${pageContext.request.contextPath}/users/DeleteMeal${MEAL.maMon}.htm">
-                                                    <button class="btn-view" type="button" onclick="showAddCategoryForm()">Xóa</button>
-                                                </a>
-                                            </div>
-
-                                            
-                                        </div>
+										<div class="btn"></div>
+										<a href="${pageContext.request.contextPath}/users/Infor_Meal${MEAL.maMon}.htm"><button class="btn-view" type="button">Xem</button></a>
 									</div>
 								</div>
 							</div>
@@ -1029,33 +878,11 @@ color: #fff
         		</div>
 			</div>
 			
-           
-
 			<!-- tab yêu thích -->
 			<div id="YeuThich" class="tabcontent">
-				<div class="container">
+				<div class="container py-5">
             		<div class="row">
-                 <div class="col-md-4">
-                        <span style="font-size: 20px; font-weight: bold;">${sizelike} Món</span>
-                    </div>
-
-                    <div class="col-md-8">
-                        
-                        <div id="search">
-                            <div class="search-bar">
-                                <div class="search-input">
-                                    
-                                    <input type="text" placeholder="Tìm kiếm" name="search" id="search-input" style="width: 300px;">
-                                    <button class="btn" type="submit" id="search-button"><i class="fa fa-search"></i></button>
-                                </div> 
-                            </div>               
-                        </div>
-                        
-                        
-                    </div>  
-                    <br>
-                    <br>
-                     <br>
+                
                     	<h6 class="text-center">DANH SÁCH CÁC MÓN ĂN YÊU THÍCH</h6>
                     
                     
@@ -1067,26 +894,9 @@ color: #fff
 										alt="${MEAL.tenMon}">
 									<div class="Name-meal">
 										<h5>${MEAL.tenMon}</h5>
-										<!-- <div class="btn"></div>
-										<a href="${pageContext.request.contextPath}/users/Infor_Meal${MEAL.maMon}.htm"><button class="btn-view" type="button">Xem</button></a> -->
-                                        <div class="container_swap1">
-                                            <div class="div_left1">
-                                                <a href="${pageContext.request.contextPath}/users/Infor_Meal${MEAL.maMon}.htm">
-                                                    <button class="btn-view" type="button">Xem</button>
-                                                </a>
-                                            </div>
-
-                                            <div class="div_right1">
-                                                <a href="#">
-                                                    <button class="btn-view" type="button">Bỏ Yêu</button>
-                                                </a>
-                                            </div>
-
-                                            
-
-                                            
-                                        </div>
-                                    </div>
+										<div class="btn"></div>
+										<a href="${pageContext.request.contextPath}/users/Infor_Meal${MEAL.maMon}.htm"><button class="btn-view" type="button">Xem</button></a>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -1095,9 +905,6 @@ color: #fff
             		</div>
         		</div>
 			</div>
-
-
-            
             
             <!-- tab bí quyết -->
             <div id="BiQuyet" class="tabcontent">
